@@ -286,10 +286,10 @@ class MysqlHelper:
         self.database.close()
 
     def insert_constant_translate(self):
-        for key in StaticField.SHIP_GROUP.keys():
+        for key in StaticField.SHIP_NAME_MAP.keys():
             sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
             cursor = self.database.cursor()
-            cursor.execute(sql, (key, StaticField.SHIP_GROUP[key]))
+            cursor.execute(sql, (key, StaticField.SHIP_NAME_MAP[key]))
             self.database.commit()
 
         for key in StaticField.COMPANY_MAP.keys():
