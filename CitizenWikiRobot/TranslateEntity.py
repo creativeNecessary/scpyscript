@@ -7,3 +7,4 @@ class TranslateEntity:
         self.belong_to = ""
         self.tag = ""
         self.translate_value = ""
+        self.original_text = ""

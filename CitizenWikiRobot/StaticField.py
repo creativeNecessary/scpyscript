@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 import os
 import platform
+from CitizenWikiRobot.TranslateEntity import TranslateEntity
 
 
 class StaticField:
@@ -22,6 +23,41 @@ class StaticField:
     SHIP_NAME_MAP = dict()
     COMPANY_MAP = dict()
     SHIP_GROUP = dict()
+    CONSTANT_GROUP = dict()
+
+    Radar = "radar"
+    Computers = "computers"
+    Power_Plants = "power_plants"
+    Coolers = "coolers"
+    Shield_Generators = "shield_generators"
+    Fuel_Intakes = "fuel_intakes"
+    Fuel_Tanks = "fuel_tanks"
+    Quantum_Drives = "quantum_drives"
+    Jump_Modules = "jump_modules"
+    Quantum_Fuel_Tanks = "quantum_fuel_tanks"
+    Main_Thrusters = "main_thrusters"
+    Maneuvering_Thrusters = "maneuvering_thrusters"
+    Weapons = "weapons"
+    Turrets = "turrets"
+    Missiles = "missiles"
+    Utility_Items = "utility_items"
+
+    CONSTANT_GROUP['radar'] = '雷达'
+    CONSTANT_GROUP['computers'] = '计算机'
+    CONSTANT_GROUP['power_plants'] = '发电装置'
+    CONSTANT_GROUP['coolers'] = '冷却装置'
+    CONSTANT_GROUP['shield_generators'] = '护盾发生器'
+    CONSTANT_GROUP['fuel_intakes'] = '喷油器'
+    CONSTANT_GROUP['fuel_tanks'] = '燃料箱'
+    CONSTANT_GROUP['quantum_drives'] = '量子引擎'
+    CONSTANT_GROUP['jump_modules'] = '跳跃模块'
+    CONSTANT_GROUP['quantum_fuel_tanks'] = '量子燃料箱'
+    CONSTANT_GROUP['main_thrusters'] = '主推进器'
+    CONSTANT_GROUP['maneuvering_thrusters'] = '辅助推进器'
+    CONSTANT_GROUP['weapons'] = '武器'
+    CONSTANT_GROUP['turrets'] = '炮塔'
+    CONSTANT_GROUP['missiles'] = '导弹'
+    CONSTANT_GROUP['utility_items'] = '功能扩展'
 
     COMPANY_MAP['Aegis Dynamics'] = '圣盾动力'
     COMPANY_MAP['Anvil Aerospace'] = '铁砧航空'
@@ -130,7 +166,7 @@ class StaticField:
     SHIP_NAME_MAP['325a'] = '325a'
     SHIP_NAME_MAP['350r'] = '350r'
     SHIP_NAME_MAP['600i Explorer'] = '600i探索'
-    SHIP_NAME_MAP['600i Touring'] = '600i旅行'
+    SHIP_NAME_MAP['600i Touring'] = '600i游览'
     SHIP_NAME_MAP['85X'] = '85X'
     SHIP_NAME_MAP['890 Jump'] = '890'
     SHIP_NAME_MAP['M50'] = 'M50'
@@ -152,7 +188,7 @@ class StaticField:
     SHIP_NAME_MAP['Pegasus'] = '飞马座'
     SHIP_NAME_MAP['Polaris'] = '北极星'
     SHIP_NAME_MAP['Zeus'] = '宙斯'
-    SHIP_NAME_MAP['Defender'] = '防御者'
+    SHIP_NAME_MAP['Defender'] = '守卫者'
     SHIP_NAME_MAP['Merchantman'] = '巴奴商船'
     SHIP_NAME_MAP['Khartu-Al'] = '卡图AL'
     SHIP_NAME_MAP['Constellation Phoenix Emerald'] = '翡翠凤凰座'
@@ -181,40 +217,6 @@ class StaticField:
     Y_Axis_Acceleration = "Y-Axis Acceleration"
     Z_Axis_Acceleration = "Z-Axis Acceleration"
 
-    Radar = "radar"
-    Computers = "computers"
-    Power_Plants = "power_plants"
-    Coolers = "coolers"
-    Shield_Generators = "shield_generators"
-    Fuel_Intakes = "fuel_intakes"
-    Fuel_Tanks = "fuel_tanks"
-    Quantum_Drives = "quantum_drives"
-    Jump_Modules = "jump_modules"
-    Quantum_Fuel_Tanks = "quantum_fuel_tanks"
-    Main_Thrusters = "main_thrusters"
-    Maneuvering_Thrusters = "maneuvering_thrusters"
-    Weapons = "weapons"
-    Turrets = "turrets"
-    Missiles = "missiles"
-    Utility_Items = "utility_items"
-
-    ITEM_TABLE = {Radar: '雷达',
-                  Computers: '计算机',
-                  Power_Plants: '发电设备',
-                  Coolers: '冷却器',
-                  Shield_Generators: '护盾发生器',
-                  Fuel_Intakes: '燃料输入口',
-                  Fuel_Tanks: '燃料箱',
-                  Quantum_Drives: '量子驱动设备',
-                  Jump_Modules: '跳跃模块',
-                  Quantum_Fuel_Tanks: '量子燃料箱',
-                  Main_Thrusters: '主推进器',
-                  Maneuvering_Thrusters: '姿态调节喷口',
-                  Weapons: '固定炮',
-                  Turrets: '炮塔',
-                  Missiles: '导弹',
-                  Utility_Items: '公共挂载点',
-                  }
 
     Avionics = "avionics"
     Modular = "modular"
@@ -228,6 +230,8 @@ class StaticField:
     Details = "details"
     Size = "size"
     Quantity = "quantity"
+
+
 
     @staticmethod
     def get_system_file_connector():

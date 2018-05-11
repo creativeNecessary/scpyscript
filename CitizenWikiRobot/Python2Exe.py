@@ -196,3 +196,51 @@
 # translate_value VARCHAR(100) NOT NULL DEFAULT '',
 # update_time timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 # PRIMARY KEY ( id ));
+
+# CREATE TABLE table_update_info (
+# id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+# table_name VARCHAR(100) NOT NULL DEFAULT '',
+# operate VARCHAR(100) NOT NULL DEFAULT '',
+# update_time timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+# PRIMARY KEY ( id ));
+
+# insert into table_update_info (table_name,operate) values ('sc_translate','create');
+# 触发器
+# delimiter //
+# create trigger sc_translate_after_insert after insert on sc_translate for each row
+# begin
+# update table_update_info set operate = 'insert' where table_name = 'sc_translate';
+# end;
+
+
+# create trigger sc_translate_after_delete after delete on sc_translate for each row
+# begin
+# update table_update_info set operate = 'delete' where table_name = 'sc_translate';
+# end;
+
+
+# create trigger sc_translate_after_update after update on sc_translate for each row
+# begin
+# update table_update_info set operate = 'update' where table_name = 'sc_translate';
+# end;
+
+# alter table sc_translate add column original_text  VARCHAR(3000) NOT NULL DEFAULT '' after tag;
+#
+# alter  table sc_translate modify  column translate_value  VARCHAR(3000) NOT NULL DEFAULT '';
+
+# CREATE TABLE constant_translate (
+# id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+# original_text VARCHAR(3000) NOT NULL DEFAULT '',
+# translate_value VARCHAR(3000) NOT NULL DEFAULT '',
+# update_time timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+# PRIMARY KEY ( id ));
+
+
+#
+#
+# SHOW CREATE TABLE constant_translate;
+# ALTER TABLE constant_translate DEFAULT CHARACTER SET utf8;
+# ALTER TABLE sc_translate DEFAULT CHARACTER SET utf8;
+#
+# ALTER TABLE constant_translate CHANGE translate_value translate_value VARCHAR(3000) CHARACTER SET utf8;
+# ALTER TABLE sc_translate CHANGE translate_value translate_value VARCHAR(3000) CHARACTER SET utf8;
