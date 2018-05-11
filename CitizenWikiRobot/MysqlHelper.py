@@ -5,8 +5,8 @@ from CitizenWikiRobot.Vehicle import Vehicle
 from CitizenWikiRobot.Equipment import ShipEquipment, Equipment, Manufacturer
 from CitizenWikiRobot.Log import Log
 from CitizenWikiRobot.ProjectConfig import ProjectConfig
-import sys
 
+import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -289,6 +289,8 @@ class MysqlHelper:
         for key in StaticField.CONSTANT_GROUP.keys():
             sql = "INSERT INTO constant_translate (original_text , translate_value  ) VALUE (%s , %s )"
             cursor = self.database.cursor()
+            Log.d(key)
+            Log.d(StaticField.CONSTANT_GROUP[key])
             cursor.execute(sql, (key, StaticField.CONSTANT_GROUP[key]))
 
         self.database.close()
