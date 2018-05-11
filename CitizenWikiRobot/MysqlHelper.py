@@ -285,23 +285,23 @@ class MysqlHelper:
     def close_db(self):
         self.database.close()
 
-    def insert_constant_translate(self):
-        for key in StaticField.SHIP_NAME_MAP.keys():
-            sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
-            cursor = self.database.cursor()
-            cursor.execute(sql, (key, StaticField.SHIP_NAME_MAP[key]))
-            self.database.commit()
-
-        for key in StaticField.COMPANY_MAP.keys():
-            sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
-            cursor = self.database.cursor()
-            cursor.execute(sql, (key, StaticField.COMPANY_MAP[key]))
-            self.database.commit()
-
-        for key in StaticField.CONSTANT_GROUP.keys():
-            sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
-            cursor = self.database.cursor()
-            cursor.execute(sql, (key, StaticField.CONSTANT_GROUP[key]))
-            self.database.commit()
-
-        self.database.close()
+    # def insert_constant_translate(self):
+    #     for key in StaticField.SHIP_NAME_MAP.keys():
+    #         sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
+    #         cursor = self.database.cursor()
+    #         cursor.execute(sql, (key, StaticField.SHIP_NAME_MAP[key]))
+    #         self.database.commit()
+    #
+    #     for key in StaticField.COMPANY_MAP.keys():
+    #         sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
+    #         cursor = self.database.cursor()
+    #         cursor.execute(sql, (key, StaticField.COMPANY_MAP[key]))
+    #         self.database.commit()
+    #
+    #     for key in StaticField.CONSTANT_GROUP.keys():
+    #         sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
+    #         cursor = self.database.cursor()
+    #         cursor.execute(sql, (key, StaticField.CONSTANT_GROUP[key]))
+    #         self.database.commit()
+    #
+    #     self.database.close()
