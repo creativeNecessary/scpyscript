@@ -290,5 +290,5 @@ class MysqlHelper:
             sql = "INSERT INTO constant_translate (original_text , translate_value  ) VALUE (%s , %s )"
             cursor = self.database.cursor()
             cursor.execute(sql, (key, StaticField.CONSTANT_GROUP[key]))
-            cursor.close()
-            self.database.close()
+
+        self.database.close()
