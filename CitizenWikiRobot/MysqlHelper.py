@@ -298,4 +298,10 @@ class MysqlHelper:
             cursor.execute(sql, (key, StaticField.COMPANY_MAP[key]))
             self.database.commit()
 
+        for key in StaticField.CONSTANT_GROUP.keys():
+            sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
+            cursor = self.database.cursor()
+            cursor.execute(sql, (key, StaticField.CONSTANT_GROUP[key]))
+            self.database.commit()
+
         self.database.close()

@@ -236,11 +236,11 @@
 # PRIMARY KEY ( id ));
 
 
-#
-#
 # SHOW CREATE TABLE constant_translate;
 # ALTER TABLE constant_translate DEFAULT CHARACTER SET utf8;
 # ALTER TABLE sc_translate DEFAULT CHARACTER SET utf8;
 #
 # ALTER TABLE constant_translate CHANGE translate_value translate_value VARCHAR(3000) CHARACTER SET utf8;
 # ALTER TABLE sc_translate CHANGE translate_value translate_value VARCHAR(3000) CHARACTER SET utf8;
+# alter  table constant_translate modify  column translate_value  VARCHAR(3000) NOT NULL DEFAULT '';
+# alter  table sc_translate modify  column translate_value  VARCHAR(3000) NOT NULL DEFAULT '';
