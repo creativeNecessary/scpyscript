@@ -275,7 +275,6 @@ class MysqlHelper:
         for equip in equipment_list:
             if equip.equipment is not None:
                 self.insert_equipment(equip.equipment)
-                Log.d("具体设备的id ： " + str(equip.equipment.id))
                 equip.equipment_id = equip.equipment.id
             self.insert_ship_equipment(equip)
             # ids = str(equip.id) + "," + ids
@@ -289,8 +288,6 @@ class MysqlHelper:
         for key in StaticField.CONSTANT_GROUP.keys():
             sql = "INSERT INTO constant_translate (original_text , translate_value  ) VALUE (%s , %s )"
             cursor = self.database.cursor()
-            Log.d(key)
-            Log.d(StaticField.CONSTANT_GROUP[key])
-            cursor.execute(sql, (key, StaticField.CONSTANT_GROUP[key]))
+            cursor.execute(sql, (key,key))
 
         self.database.close()
