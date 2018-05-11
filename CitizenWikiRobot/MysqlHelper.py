@@ -7,6 +7,7 @@ from CitizenWikiRobot.Log import Log
 from CitizenWikiRobot.ProjectConfig import ProjectConfig
 
 import sys
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -286,8 +287,8 @@ class MysqlHelper:
 
     def insert_constant_translate(self):
         for key in StaticField.CONSTANT_GROUP.keys():
-            sql = "INSERT INTO constant_translate (original_text , translate_value  ) VALUE (%s , %s )"
+            sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
             cursor = self.database.cursor()
-            cursor.execute(sql, (key,key))
-
+            cursor.execute(sql, (key, StaticField.CONSTANT_GROUP[key]))
+            self.database.commit()
         self.database.close()
