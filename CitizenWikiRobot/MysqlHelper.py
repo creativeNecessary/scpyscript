@@ -155,10 +155,8 @@ class MysqlHelper:
         else:
             sql = Vehicle.get_insert_sql()
             Log.d('Insert Ship')
-            self.handle_opt_data(vehicle.store_large)
-            self.handle_opt_data(vehicle.id)
-            Log.d(vehicle.store_large)
             Log.d(sql)
+            Log.d(type(vehicle.id))
             rows = cursor.execute(sql, (
                 vehicle.id,
                 self.handle_opt_data(vehicle.production_status),
