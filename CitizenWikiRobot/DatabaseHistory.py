@@ -12,139 +12,62 @@
 # # CREATE DATABASE StarCitizen
 #
 # CREATE TABLE ship_en (
-# id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-# name VARCHAR(50) NOT NULL DEFAULT '',
-# url VARCHAR(3000) NOT NULL DEFAULT '',
-# description VARCHAR(3000) NOT NULL DEFAULT '',
-# json_str INT  NOT NULL DEFAULT -1,
-# icon VARCHAR(3000) NOT NULL DEFAULT '',
-# pic_url VARCHAR(2000) NOT NULL DEFAULT '',
-# manufacturer_id VARCHAR(10) NOT NULL DEFAULT '',
+# id INT NOT NULL DEFAULT -1,
+# production_status VARCHAR(50) NOT NULL DEFAULT '',
+# production_note VARCHAR(2000) NOT NULL DEFAULT '',
+# length VARCHAR(10) NOT NULL DEFAULT '',
+# beam VARCHAR(10) NOT NULL DEFAULT '',
+# height VARCHAR(10) NOT NULL DEFAULT '',
 # size VARCHAR(10) NOT NULL DEFAULT '',
-# focus VARCHAR(50) NOT NULL DEFAULT '',
-# production_state VARCHAR(50) NOT NULL DEFAULT '',
-#
-# max_crew VARCHAR(10) NOT NULL DEFAULT '',
+# mass VARCHAR(15) NOT NULL DEFAULT '',
+# type VARCHAR(100) NOT NULL DEFAULT '',
+# cargocapacity VARCHAR(20) NOT NULL DEFAULT '',
 # min_crew VARCHAR(10) NOT NULL DEFAULT '',
+# max_crew VARCHAR(10) NOT NULL DEFAULT '',
+# scm_speed VARCHAR(15) NOT NULL DEFAULT '',
+# afterburner_speed VARCHAR(15) NOT NULL DEFAULT '',
 # pitch_max VARCHAR(15) NOT NULL DEFAULT '',
 # yaw_max VARCHAR(15) NOT NULL DEFAULT '',
 # roll_max VARCHAR(15) NOT NULL DEFAULT '',
 # x_axis_acceleration VARCHAR(15) NOT NULL DEFAULT '',
 # y_axis_acceleration VARCHAR(15) NOT NULL DEFAULT '',
 # z_axis_acceleration VARCHAR(15) NOT NULL DEFAULT '',
-#
-# cargo_capacity VARCHAR(15) NOT NULL DEFAULT '',
-# rec_cost VARCHAR(10) NOT NULL DEFAULT '',
-# pledge_cost VARCHAR(10) NOT NULL DEFAULT '',
-# mass VARCHAR(15) NOT NULL DEFAULT '',
-# scm_speed VARCHAR(15) NOT NULL DEFAULT '',
-# afterburner_speed VARCHAR(15) NOT NULL DEFAULT '',
-# length VARCHAR(10) NOT NULL DEFAULT '',
-# beam VARCHAR(10) NOT NULL DEFAULT '',
-# height VARCHAR(10) NOT NULL DEFAULT '',
-#
-# avionics VARCHAR(2000) NOT NULL DEFAULT '',
-# modular VARCHAR(2000)  NOT NULL DEFAULT '',
-# propulsion VARCHAR(2000)  NOT NULL DEFAULT '',
-# thrusters VARCHAR(2000)  NOT NULL DEFAULT '',
-# weapons VARCHAR(2000)  NOT NULL DEFAULT '',
-#
+# manufacturer_code VARCHAR(300) NOT NULL DEFAULT '',
+# chassis_id VARCHAR(15) NOT NULL DEFAULT '',
+# time_modified VARCHAR(500) NOT NULL DEFAULT '',
+# name VARCHAR(50) NOT NULL DEFAULT '',
+# focus VARCHAR(50) NOT NULL DEFAULT '',
+# description VARCHAR(3000) NOT NULL DEFAULT '',
+# url VARCHAR(3000) NOT NULL DEFAULT '',
+# store_large VARCHAR(3000) NOT NULL DEFAULT '',
+# image VARCHAR(2000) NOT NULL DEFAULT '',
 # update_time timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 # PRIMARY KEY ( id ));
-# #
-# #
-# CREATE TABLE field_ch (
-# id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-# original VARCHAR(100) NOT NULL DEFAULT '',
-# content VARCHAR(100) NOT NULL DEFAULT '',
-# update_time timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-# PRIMARY KEY ( id ));
-#
-# # Manufacturer = "Manufacturer"
-# # Size = "Size"
-# # Focus = "Focus"
-# # Production_State = "Production State"
-# # Maximum_Crew = "Maximum Crew"
-# # Cargo_Capacity = "Cargo Capacity"
-# # REC_Cost = "REC Cost"
-# # Pledge_Cost = "Pledge Cost"
-# # Null_cargo_Mass = "Null-cargo Mass"
-# # SCM_Speed = "SCM Speed"
-# # Afterburner_Speed = "Afterburner Speed"
-# # Length = "Length"
-# # Beam = "Beam"
-# # Height = "Height"
-# #
-# #
-# # INSERT INTO field_original (original) VALUE ('Manufacturer')
-# #
-# # INSERT INTO field_original (original) VALUE ('Size')
-# # INSERT INTO field_original (original) VALUE ('Focus')
-# # INSERT INTO field_original (original) VALUE ('Production State')
-# # INSERT INTO field_original (original) VALUE ('Maximum Crew')
-# # INSERT INTO field_original (original) VALUE ('Cargo Capacity')
-# # INSERT INTO field_original (original) VALUE ('REC Cost')
-# # INSERT INTO field_original (original) VALUE ('Pledge Cost')
-# # INSERT INTO field_original (original) VALUE ('Null-cargo Mass')
-# # INSERT INTO field_original (original) VALUE ('SCM Speed')
-# # INSERT INTO field_original (original) VALUE ('Afterburner Speed')
-# # INSERT INTO field_original (original) VALUE ('Length')
-# # INSERT INTO field_original (original) VALUE ('Beam')
-# # INSERT INTO field_original (original) VALUE ('Height')
-# #
-# # INSERT INTO field_original (original) VALUE ('Radar')
-# # INSERT INTO field_original (original) VALUE ('Computers')
-# # INSERT INTO field_original (original) VALUE ('Power Plants')
-# # INSERT INTO field_original (original) VALUE ('Coolers')
-# # INSERT INTO field_original (original) VALUE ('Shield Generators')
-# # INSERT INTO field_original (original) VALUE ('Fuel Intakes')
-# # INSERT INTO field_original (original) VALUE ('Fuel Tanks')
-# # INSERT INTO field_original (original) VALUE ('Quantum Drives')
-# # INSERT INTO field_original (original) VALUE ('Jump Modules')
-# # INSERT INTO field_original (original) VALUE ('Quantum Fuel Tanks')
-# # INSERT INTO field_original (original) VALUE ('Main Thrusters')
-# # INSERT INTO field_original (original) VALUE ('Maneuvering Thrusters')
-# # INSERT INTO field_original (original) VALUE ('Weapons')
-# # INSERT INTO field_original (original) VALUE ('Turrets')
-# # INSERT INTO field_original (original) VALUE ('Missiles')
-# # INSERT INTO field_original (original) VALUE ('Utility Items')
-# #
-# # INSERT INTO field_original (original) VALUE ('Avionics')
-# # INSERT INTO field_original (original) VALUE ('Systems')
-# # INSERT INTO field_original (original) VALUE ('Propulsion')
-# # INSERT INTO field_original (original) VALUE ('Thrusters')
-# # INSERT INTO field_original (original) VALUE ('Weaponry')
-# #
-# #
+
+
 # CREATE TABLE ship_equipment_en (
-# id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+# id INT NOT NULL DEFAULT -1,
 # type VARCHAR(40) NOT NULL DEFAULT '',
+# name VARCHAR(40) NOT NULL DEFAULT '',
+# mounts VARCHAR(40) NOT NULL DEFAULT '',
+# component_size VARCHAR(40) NOT NULL DEFAULT '',
 # size VARCHAR(20) NOT NULL DEFAULT '',
-# quantity VARCHAR(10) NOT NULL DEFAULT '',
-# details VARCHAR(500) NOT NULL DEFAULT '',
-# tag VARCHAR(40) NOT NULL DEFAULT '',
-# equipment_id INT NOT NULL DEFAULT -1,
+# details VARCHAR(3000) NOT NULL DEFAULT '',
+# quantity VARCHAR(40) NOT NULL DEFAULT '',
+# manufacturer VARCHAR(100) NOT NULL DEFAULT '',
+# component_class VARCHAR(100) NOT NULL DEFAULT '',
 # ship_id INT NOT NULL DEFAULT -1,
 # update_time timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 # PRIMARY KEY ( id ));
-# #
-# CREATE TABLE equipment_en (
-# id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-# type VARCHAR(40) NOT NULL DEFAULT '',
-# size VARCHAR(20) NOT NULL DEFAULT '',
-# name VARCHAR(40) NOT NULL DEFAULT '',
-# manufacturer_id VARCHAR(10) NOT NULL DEFAULT '',
-# update_time timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-# PRIMARY KEY ( id ));
+
 #
 # CREATE TABLE manufacturer_en (
-# id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-# name VARCHAR(100) NOT NULL DEFAULT '',
+# id INT NOT NULL DEFAULT -1,
 # code VARCHAR(100) NOT NULL DEFAULT '',
-# known_for VARCHAR(100) NOT NULL DEFAULT '',
-# description VARCHAR(5000) NOT NULL DEFAULT '',
-# icon VARCHAR(3000) NOT NULL DEFAULT '',
-# url VARCHAR(3000) NOT NULL DEFAULT '',
+# name VARCHAR(100) NOT NULL DEFAULT '',
+# known_for VARCHAR(500) NOT NULL DEFAULT '',
+# description VARCHAR(3000) NOT NULL DEFAULT '',
+# source_url VARCHAR(3000) NOT NULL DEFAULT '',
 # update_time timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 # PRIMARY KEY ( id ));
 #
@@ -244,3 +167,4 @@
 # ALTER TABLE sc_translate CHANGE translate_value translate_value VARCHAR(3000) CHARACTER SET utf8;
 # alter  table constant_translate modify  column translate_value  VARCHAR(3000) NOT NULL DEFAULT '';
 # alter  table sc_translate modify  column translate_value  VARCHAR(3000) NOT NULL DEFAULT '';
+
