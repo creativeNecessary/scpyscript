@@ -23,7 +23,7 @@ class MysqlHelper:
     @staticmethod
     def handle_opt_data(data):
         if data is None:
-            return ""
+            return ''
         else:
             return str(data)
 
@@ -187,7 +187,7 @@ class MysqlHelper:
                 self.handle_opt_data(vehicle.focus),
                 self.handle_opt_data(vehicle.description),
                 self.handle_opt_data(vehicle.url),
-                # self.handle_opt_data(vehicle.store_large)
+                self.handle_opt_data(vehicle.store_large)
             ))
             self.database.commit()
         cursor.close()
