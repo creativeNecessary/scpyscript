@@ -95,7 +95,7 @@ class Vehicle:
         self.name = self.data_json.get('name')
         self.focus = self.data_json.get('focus')
         self.description = self.data_json.get('description')
-        self.store_large = self.data_json.get('store_large')
+        self.store_large = self.data_json.get('images').get('store_large')
 
         Log.d('Loading Ship ' + self.name)
 
