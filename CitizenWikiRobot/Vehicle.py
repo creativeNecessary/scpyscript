@@ -12,7 +12,7 @@ class Vehicle:
 
     def __init__(self, url):
         self.data_json = None
-        self.id = ""
+        self.id = -1
         self.production_status = ""
         self.production_note = ""
         self.length = ""
@@ -207,8 +207,3 @@ class Vehicle:
 
         return sql
 
-    def set_id2ship_equipment(self):
-        equipment_list = [self.avionics, self.modular, self.propulsion, self.thrusters, self.weapons]
-        for equipments in equipment_list:
-            for ship_equipment in equipments:
-                ship_equipment.ship_id = self.id

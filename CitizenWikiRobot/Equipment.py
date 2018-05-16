@@ -4,7 +4,7 @@
 class ShipEquipment:
     # 飞船挂点 里面包含一个装备
     def __init__(self):
-        self.ship_id = ""
+        self.ship_id = -1
         self.type = ""
         self.name = ""
         self.mounts = ""
@@ -40,7 +40,7 @@ class ShipEquipment:
 
 class Manufacturer:
     def __init__(self):
-        self.id = ""
+        self.id = -1
         self.code = ""
         self.name = ""
         self.known_for = ""
