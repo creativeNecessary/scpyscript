@@ -199,7 +199,7 @@ class Vehicle:
               ", 'store_large' " \
               ") VALUES ("
 
-        for time in range(0, 20):
+        for time in range(0, 27):
             sql = sql + " '%s' ,"
         sql = sql + "  '%s' )"
 
