@@ -162,7 +162,7 @@ class Vehicle:
               + ', description = %s' \
               + ', url = %s' \
               + ', store_large = %s' \
-              + 'WHERE id = %d'
+              + 'WHERE id = %s'
 
         return sql
 
@@ -200,8 +200,7 @@ class Vehicle:
               + ', url   ' \
               + ', store_large   ' \
               + ') VALUE ('
-        sql = sql + ' %d ,'
-        for time in range(0, 25):
+        for time in range(0, 26):
             sql = sql + ' %s ,'
         sql = sql + '  %s )'
 
