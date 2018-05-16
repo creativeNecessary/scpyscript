@@ -89,7 +89,8 @@ def init_ship(html, mysql_helper):
         ship_data = ship_element.find("a", attrs={'class': 'filet'})
         ship_url = ship_data.attrs['href']
         init_vehicle(ship_url)
-        mysql_helper.insert2mysql(vehicle)
+    for ship in ship_list:
+        mysql_helper.insert2mysql(ship)
 
 
 def get_ship_json(page):
