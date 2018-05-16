@@ -47,7 +47,7 @@ class MysqlHelper:
                                     self.handle_opt_data(ship_equipment.type),
                                     self.handle_opt_data(ship_equipment.size),
                                     self.handle_opt_data(ship_equipment.quantity),
-                                    self.handle_opt_data(ship_equipment.ship_id),
+                                    str(ship_equipment.ship_id),
                                     ))
         if cursor.rowcount > 0:
             data = cursor.fetchone()
@@ -98,12 +98,12 @@ class MysqlHelper:
                             self.handle_opt_data(manufacturer.description),
                             self.handle_opt_data(manufacturer.source_url),
                             self.handle_opt_data(manufacturer.url),
-                            manufacturer.id))
+                            str(manufacturer.id)))
             self.database.commit()
 
         else:
             sql = 'INSERT INTO manufacturer_en (id,code,name,known_for,description,source_url,url) VALUES (%s,%s,%s,%s,%s,%s,%s)'
-            cursor.execute(sql, (self.handle_opt_data(manufacturer.id),
+            cursor.execute(sql, (str(manufacturer.id),
                                  self.handle_opt_data(manufacturer.code),
                                  self.handle_opt_data(manufacturer.name),
                                  self.handle_opt_data(manufacturer.known_for),
