@@ -147,7 +147,7 @@ class MysqlHelper:
                 self.handle_opt_data(vehicle.description),
                 self.handle_opt_data(vehicle.url),
                 self.handle_opt_data(vehicle.store_large),
-                self.handle_opt_data(vehicle.id),
+                str(vehicle.id),
 
             ))
             self.database.commit()
@@ -160,7 +160,7 @@ class MysqlHelper:
             Log.d(vehicle.store_large)
             Log.d(sql)
             rows = cursor.execute(sql, (
-                self.handle_opt_data(vehicle.id),
+                str(vehicle.id),
                 self.handle_opt_data(vehicle.production_status),
                 self.handle_opt_data(vehicle.production_note),
                 self.handle_opt_data(vehicle.length),
