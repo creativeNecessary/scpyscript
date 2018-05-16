@@ -200,9 +200,9 @@ class Vehicle:
               + ', url   ' \
               + ', store_large   ' \
               + ') VALUE ('
-
-        for time in range(0, 26):
-            sql = sql + ' %d ,'
+        sql = sql + ' %d ,'
+        for time in range(0, 25):
+            sql = sql + ' %s ,'
         sql = sql + '  %s )'
 
         return sql
