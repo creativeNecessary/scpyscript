@@ -200,8 +200,8 @@ class Vehicle:
               ") VALUES ("
 
         for time in range(0, 20):
-            sql = sql + " ? ,"
-        sql = sql + "  ? )"
+            sql = sql + " '%s' ,"
+        sql = sql + "  '%s' )"
 
         return sql
 
