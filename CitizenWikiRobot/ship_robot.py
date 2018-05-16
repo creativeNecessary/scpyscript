@@ -19,7 +19,7 @@ chassis_id_list = []
 
 
 def init_vehicle(url):
-    # mysql_helper = MysqlHelper()
+    mysql_helper = MysqlHelper()
 
     vehicle = Vehicle(url)
     page = requests.get(StaticField.BASE_URL + vehicle.url)
@@ -42,7 +42,7 @@ def init_vehicle(url):
         if url == ship_url:
             vehicle.data_json = ship_item
             vehicle.init_with_data_json()
-            # mysql_helper.insert2mysql(vehicle)
+            mysql_helper.insert2mysql(vehicle)
             break
 
     # icon store_large
