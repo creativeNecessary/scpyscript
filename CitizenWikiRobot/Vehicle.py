@@ -70,7 +70,7 @@ class Vehicle:
             self.ship_equipment_list.append(ship_equipment)
 
     def init_with_data_json(self):
-        self.id = self.data_json.get('id')
+        self.id = int(self.data_json.get('id'))
         self.production_status = self.data_json.get('production_status')
         self.production_note = self.data_json.get('production_note')
         self.length = self.data_json.get('length')
