@@ -16,7 +16,7 @@ class MysqlHelper:
 
     def __init__(self):
         self.database = pymysql.connect(host='localhost', user=ProjectConfig.user, passwd=ProjectConfig.passwd,
-                                        db=ProjectConfig.db, charset=ProjectConfig.charset,use_unicode=True)
+                                        db=ProjectConfig.db, charset=ProjectConfig.charset)
         # 清除挂点数据与图片数据
         self.clear_img_ship_equipment()
 
@@ -166,26 +166,26 @@ class MysqlHelper:
                 self.handle_opt_data(vehicle.height),
                 self.handle_opt_data(vehicle.size),
                 self.handle_opt_data(vehicle.mass),
-                self.handle_opt_data(vehicle.type),
-                self.handle_opt_data(vehicle.cargocapacity),
-                self.handle_opt_data(vehicle.min_crew),
-                self.handle_opt_data(vehicle.max_crew),
-                self.handle_opt_data(vehicle.scm_speed),
-                self.handle_opt_data(vehicle.afterburner_speed),
-                self.handle_opt_data(vehicle.pitch_max),
-                self.handle_opt_data(vehicle.yaw_max),
-                self.handle_opt_data(vehicle.roll_max),
-                self.handle_opt_data(vehicle.x_axis_acceleration),
-                self.handle_opt_data(vehicle.y_axis_acceleration),
-                self.handle_opt_data(vehicle.z_axis_acceleration),
-                self.handle_opt_data(vehicle.manufacturer_code),
-                self.handle_opt_data(vehicle.chassis_id),
-                self.handle_opt_data(vehicle.time_modified),
-                self.handle_opt_data(vehicle.name),
-                self.handle_opt_data(vehicle.focus),
-                self.handle_opt_data(vehicle.description),
-                self.handle_opt_data(vehicle.url),
-                self.handle_opt_data(vehicle.store_large),
+                # self.handle_opt_data(vehicle.type),
+                # self.handle_opt_data(vehicle.cargocapacity),
+                # self.handle_opt_data(vehicle.min_crew),
+                # self.handle_opt_data(vehicle.max_crew),
+                # self.handle_opt_data(vehicle.scm_speed),
+                # self.handle_opt_data(vehicle.afterburner_speed),
+                # self.handle_opt_data(vehicle.pitch_max),
+                # self.handle_opt_data(vehicle.yaw_max),
+                # self.handle_opt_data(vehicle.roll_max),
+                # self.handle_opt_data(vehicle.x_axis_acceleration),
+                # self.handle_opt_data(vehicle.y_axis_acceleration),
+                # self.handle_opt_data(vehicle.z_axis_acceleration),
+                # self.handle_opt_data(vehicle.manufacturer_code),
+                # self.handle_opt_data(vehicle.chassis_id),
+                # self.handle_opt_data(vehicle.time_modified),
+                # self.handle_opt_data(vehicle.name),
+                # self.handle_opt_data(vehicle.focus),
+                # self.handle_opt_data(vehicle.description),
+                # self.handle_opt_data(vehicle.url),
+                # self.handle_opt_data(vehicle.store_large),
             ))
             self.database.commit()
         cursor.close()
