@@ -66,7 +66,7 @@ def get_ships():
     html = ship_json.get('data').get('html')
     totalrows = ship_json.get('data').get('totalrows')
     rowcount = ship_json.get('data').get('rowcount')
-    init_ship(html, mysql_helper)
+    init_ship(html)
     need_req_time = float(totalrows) / rowcount
     if need_req_time != 0:
         need_req_time += 1
@@ -74,13 +74,16 @@ def get_ships():
         print "正在获取第 " + str(page) + "页数据"
         ship_json = get_ship_json(page)
         html = ship_json.get('data').get('html')
-        init_ship(html, mysql_helper)
-    #     插入公司
+        init_ship(html)
+
+    for ship in ship_list:
+        mysql_helper.insert2mysql(ship)
+        #     插入公司
     Log.d('开始将公司插入数据库')
     mysql_helper.insert_manufacturer(manufacturer_list)
 
 
-def init_ship(html, mysql_helper):
+def init_ship(html):
     ship_shoup = bs4.BeautifulSoup(html, "lxml")
     ship_elements = ship_shoup.find_all("li", attrs={"class": "ship-item"})
     for ship_element in ship_elements:
@@ -89,8 +92,6 @@ def init_ship(html, mysql_helper):
         ship_data = ship_element.find("a", attrs={'class': 'filet'})
         ship_url = ship_data.attrs['href']
         init_vehicle(ship_url)
-    for ship in ship_list:
-        mysql_helper.insert2mysql(ship)
 
 
 def get_ship_json(page):
