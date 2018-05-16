@@ -20,8 +20,11 @@ chassis_id_list = []
 
 def init_vehicle(url):
     mysql_helper = MysqlHelper()
-
     vehicle = Vehicle(url)
+    mysql_helper.insert2mysql(vehicle)
+
+    return
+
     page = requests.get(StaticField.BASE_URL + vehicle.url)
     ship_soup = bs4.BeautifulSoup(page.content, "lxml")
 
