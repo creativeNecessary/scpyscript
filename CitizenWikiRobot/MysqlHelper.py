@@ -25,7 +25,7 @@ class MysqlHelper:
         if data is None:
             return ""
         else:
-            return data
+            return str(data)
 
     def select_manufacture(self, manufacturer):
         cursor = self.database.cursor()
@@ -47,7 +47,7 @@ class MysqlHelper:
                                     self.handle_opt_data(ship_equipment.type),
                                     self.handle_opt_data(ship_equipment.size),
                                     self.handle_opt_data(ship_equipment.quantity),
-                                    str(ship_equipment.ship_id),
+                                    self.handle_opt_data(ship_equipment.ship_id)
                                     ))
         if cursor.rowcount > 0:
             data = cursor.fetchone()
@@ -64,7 +64,7 @@ class MysqlHelper:
         cursor.execute(select_sql, (self.handle_opt_data(equipment.name),
                                     self.handle_opt_data(equipment.size),
                                     self.handle_opt_data(equipment.type),
-                                    str(equipment.manufacturer_id)
+                                    self.handle_opt_data(equipment.manufacturer_id)
                                     ))
         if cursor.rowcount > 0:
             data = cursor.fetchone()
@@ -98,12 +98,14 @@ class MysqlHelper:
                             self.handle_opt_data(manufacturer.description),
                             self.handle_opt_data(manufacturer.source_url),
                             self.handle_opt_data(manufacturer.url),
-                            str(manufacturer.id)))
+                            self.handle_opt_data(manufacturer.id))
+                           )
             self.database.commit()
 
         else:
             sql = 'INSERT INTO manufacturer_en (id,code,name,known_for,description,source_url,url) VALUES (%s,%s,%s,%s,%s,%s,%s)'
-            cursor.execute(sql, (str(manufacturer.id),
+            cursor.execute(sql, (
+                                 self.handle_opt_data(manufacturer.id),
                                  self.handle_opt_data(manufacturer.code),
                                  self.handle_opt_data(manufacturer.name),
                                  self.handle_opt_data(manufacturer.known_for),
@@ -147,7 +149,7 @@ class MysqlHelper:
                 self.handle_opt_data(vehicle.description),
                 self.handle_opt_data(vehicle.url),
                 self.handle_opt_data(vehicle.store_large),
-                vehicle.id,
+                self.handle_opt_data(vehicle.id)
 
             ))
             self.database.commit()
@@ -158,34 +160,34 @@ class MysqlHelper:
             Log.d(sql)
             Log.d(type(vehicle.id))
             rows = cursor.execute(sql, (
-                str(vehicle.id),
-                # self.handle_opt_data(vehicle.production_status),
-                # self.handle_opt_data(vehicle.production_note),
-                # self.handle_opt_data(vehicle.length),
-                # self.handle_opt_data(vehicle.beam),
-                # self.handle_opt_data(vehicle.height),
-                # self.handle_opt_data(vehicle.size),
-                # self.handle_opt_data(vehicle.mass),
-                # self.handle_opt_data(vehicle.type),
-                # self.handle_opt_data(vehicle.cargocapacity),
-                # self.handle_opt_data(vehicle.min_crew),
-                # self.handle_opt_data(vehicle.max_crew),
-                # self.handle_opt_data(vehicle.scm_speed),
-                # self.handle_opt_data(vehicle.afterburner_speed),
-                # self.handle_opt_data(vehicle.pitch_max),
-                # self.handle_opt_data(vehicle.yaw_max),
-                # self.handle_opt_data(vehicle.roll_max),
-                # self.handle_opt_data(vehicle.x_axis_acceleration),
-                # self.handle_opt_data(vehicle.y_axis_acceleration),
-                # self.handle_opt_data(vehicle.z_axis_acceleration),
-                # self.handle_opt_data(vehicle.manufacturer_code),
-                # self.handle_opt_data(vehicle.chassis_id),
-                # self.handle_opt_data(vehicle.time_modified),
-                # self.handle_opt_data(vehicle.name),
-                # self.handle_opt_data(vehicle.focus),
-                # self.handle_opt_data(vehicle.description),
-                # self.handle_opt_data(vehicle.url),
-                # self.handle_opt_data(vehicle.store_large),
+                self.handle_opt_data(vehicle.id),
+                self.handle_opt_data(vehicle.production_status),
+                self.handle_opt_data(vehicle.production_note),
+                self.handle_opt_data(vehicle.length),
+                self.handle_opt_data(vehicle.beam),
+                self.handle_opt_data(vehicle.height),
+                self.handle_opt_data(vehicle.size),
+                self.handle_opt_data(vehicle.mass),
+                self.handle_opt_data(vehicle.type),
+                self.handle_opt_data(vehicle.cargocapacity),
+                self.handle_opt_data(vehicle.min_crew),
+                self.handle_opt_data(vehicle.max_crew),
+                self.handle_opt_data(vehicle.scm_speed),
+                self.handle_opt_data(vehicle.afterburner_speed),
+                self.handle_opt_data(vehicle.pitch_max),
+                self.handle_opt_data(vehicle.yaw_max),
+                self.handle_opt_data(vehicle.roll_max),
+                self.handle_opt_data(vehicle.x_axis_acceleration),
+                self.handle_opt_data(vehicle.y_axis_acceleration),
+                self.handle_opt_data(vehicle.z_axis_acceleration),
+                self.handle_opt_data(vehicle.manufacturer_code),
+                self.handle_opt_data(vehicle.chassis_id),
+                self.handle_opt_data(vehicle.time_modified),
+                self.handle_opt_data(vehicle.name),
+                self.handle_opt_data(vehicle.focus),
+                self.handle_opt_data(vehicle.description),
+                self.handle_opt_data(vehicle.url),
+                self.handle_opt_data(vehicle.store_large)
             ))
             self.database.commit()
         cursor.close()
