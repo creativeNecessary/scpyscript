@@ -95,7 +95,12 @@ class Vehicle:
         self.name = self.data_json.get('name')
         self.focus = self.data_json.get('focus')
         self.description = self.data_json.get('description')
-        self.store_large = self.data_json.get('images').get('store_large')
+        media_list = self.data_json.get('media')
+        if len(media_list) > 0:
+            media = media_list[0]
+            images = media.get('images')
+            if images is not None:
+                self.store_large = images.get('store_large')
 
         Log.d('Loading Ship ' + self.name)
 
