@@ -171,34 +171,34 @@ class Vehicle:
 
         sql = 'INSERT INTO ship_en ' \
               + '(' \
-              + '  id = %s ' \
-              + ', production_status = %s ' \
-              + ', production_note = %s' \
-              + ', length = %s' \
-              + ', beam = %s' \
-              + ', height = %s' \
-              + ', size = %s' \
-              + ', mass = %s' \
-              + ', type = %s' \
-              + ', cargocapacity = %s' \
-              + ', min_crew = %s' \
-              + ', max_crew = %s' \
-              + ', scm_speed = %s' \
-              + ', afterburner_speed = %s' \
-              + ', pitch_max = %s' \
-              + ', yaw_max = %s' \
-              + ', roll_max = %s' \
-              + ', x_axis_acceleration = %s' \
-              + ', y_axis_acceleration = %s' \
-              + ', z_axis_acceleration = %s' \
-              + ', manufacturer_code = %s' \
-              + ', chassis_id = %s' \
-              + ', time_modified = %s' \
-              + ', name = %s' \
-              + ', focus = %s' \
-              + ', description = %s' \
-              + ', url = %s' \
-              + ', store_large = %s' \
+              + '  id  ' \
+              + ', production_status  ' \
+              + ', production_note ' \
+              + ', length   ' \
+              + ', beam   ' \
+              + ', height   ' \
+              + ', size   ' \
+              + ', mass   ' \
+              + ', type   ' \
+              + ', cargocapacity   ' \
+              + ', min_crew   ' \
+              + ', max_crew   ' \
+              + ', scm_speed   ' \
+              + ', afterburner_speed   ' \
+              + ', pitch_max   ' \
+              + ', yaw_max   ' \
+              + ', roll_max   ' \
+              + ', x_axis_acceleration   ' \
+              + ', y_axis_acceleration   ' \
+              + ', z_axis_acceleration   ' \
+              + ', manufacturer_code   ' \
+              + ', chassis_id   ' \
+              + ', time_modified   ' \
+              + ', name   ' \
+              + ', focus   ' \
+              + ', description   ' \
+              + ', url   ' \
+              + ', store_large   ' \
               + ') VALUE ('
 
         for time in range(0, 26):
