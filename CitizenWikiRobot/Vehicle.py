@@ -197,11 +197,11 @@ class Vehicle:
               ", description " \
               ", url " \
               ", store_large " \
-              ") VALUE ("
+              ") VALUES ("
 
         for time in range(0, 20):
-            sql = sql + " '%s' ,"
-        sql = sql + "  '%s' )"
+            sql = sql + " ? ,"
+        sql = sql + "  ? )"
 
         return sql
 

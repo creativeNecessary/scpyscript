@@ -121,6 +121,7 @@ class MysqlHelper:
         have_data = self.select_vehicle(vehicle)
         if have_data:
             sql = Vehicle.get_update_sql()
+
             rows = cursor.execute(sql, (
                 self.handle_opt_data(vehicle.production_status),
                 self.handle_opt_data(vehicle.production_note),
