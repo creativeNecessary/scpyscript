@@ -168,41 +168,40 @@ class Vehicle:
 
     @staticmethod
     def get_insert_sql():
+        sql = "INSERT INTO ship_en (" \
+              " id " \
+              ", production_status " \
+              ", production_note " \
+              ", length " \
+              ", beam " \
+              ", height " \
+              ", size " \
+              ", mass " \
+              ", type " \
+              ", cargocapacity " \
+              ", min_crew " \
+              ", max_crew " \
+              ", scm_speed " \
+              ", afterburner_speed " \
+              ", pitch_max " \
+              ", yaw_max " \
+              ", roll_max " \
+              ", x_axis_acceleration " \
+              ", y_axis_acceleration " \
+              ", z_axis_acceleration " \
+              ", manufacturer_code " \
+              ", chassis_id " \
+              ", time_modified " \
+              ", name " \
+              ", focus " \
+              ", description " \
+              ", url " \
+              ", store_large " \
+              ") VALUE ("
 
-        sql = 'INSERT INTO ship_en ' \
-              + '(' \
-              + '  id  ' \
-              + ', production_status  ' \
-              + ', production_note ' \
-              + ', length   ' \
-              + ', beam   ' \
-              + ', height   ' \
-              + ', size   ' \
-              + ', mass   ' \
-              + ', type   ' \
-              + ', cargocapacity   ' \
-              + ', min_crew   ' \
-              + ', max_crew   ' \
-              + ', scm_speed   ' \
-              + ', afterburner_speed   ' \
-              + ', pitch_max   ' \
-              + ', yaw_max   ' \
-              + ', roll_max   ' \
-              + ', x_axis_acceleration   ' \
-              + ', y_axis_acceleration   ' \
-              + ', z_axis_acceleration   ' \
-              + ', manufacturer_code   ' \
-              + ', chassis_id   ' \
-              + ', time_modified   ' \
-              + ', name   ' \
-              + ', focus   ' \
-              + ', description   ' \
-              + ', url   ' \
-              + ', store_large   ' \
-              + ') VALUE ('
         for time in range(0, 20):
-            sql = sql + ' ? ,'
-        sql = sql + '  ? )'
+            sql = sql + " '%s' ,"
+        sql = sql + "  '%s' )"
 
         return sql
 
