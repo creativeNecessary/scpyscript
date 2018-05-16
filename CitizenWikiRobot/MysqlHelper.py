@@ -187,7 +187,6 @@ class MysqlHelper:
                 self.handle_opt_data(vehicle.store_large),
             ))
             self.database.commit()
-            self.select_vehicle(vehicle)
         cursor.close()
         # 给所有的设备赋值飞船id
 
