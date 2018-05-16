@@ -167,7 +167,7 @@ class Vehicle:
         sql = 'INSERT INTO ship_en ' \
               + '(' \
               + '  id = %s ' \
-              + '  production_status = %s ' \
+              + ', production_status = %s ' \
               + ', production_note = %s' \
               + ', length = %s' \
               + ', beam = %s' \
