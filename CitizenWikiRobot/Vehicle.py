@@ -201,8 +201,8 @@ class Vehicle:
               + ', store_large   ' \
               + ') VALUE ('
         for time in range(0, 26):
-            sql = sql + ' %s ,'
-        sql = sql + '  %s )'
+            sql = sql + ' ? ,'
+        sql = sql + '  ? )'
 
         return sql
 
