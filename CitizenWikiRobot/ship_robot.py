@@ -19,12 +19,7 @@ chassis_id_list = []
 
 
 def init_vehicle(url):
-    mysql_helper = MysqlHelper()
     vehicle = Vehicle(url)
-    mysql_helper.insert2mysql(vehicle)
-
-    return
-
     page = requests.get(StaticField.BASE_URL + vehicle.url)
     ship_soup = bs4.BeautifulSoup(page.content, "lxml")
 
@@ -45,11 +40,8 @@ def init_vehicle(url):
         if url == ship_url:
             vehicle.data_json = ship_item
             vehicle.init_with_data_json()
-            mysql_helper.insert2mysql(vehicle)
             break
-
     # icon store_large
-
     thumbnails = ship_soup.find("span", attrs={'class': 'thumbnails clearfix'})
     if thumbnails is not None:
         img_urls = []
@@ -66,7 +58,7 @@ def init_vehicle(url):
 
 
 def get_ships():
-    # mysql_helper = MysqlHelper()
+    mysql_helper = MysqlHelper()
     page = 1
     ship_json = get_ship_json(page)
     html = ship_json.get('data').get('html')
@@ -82,11 +74,11 @@ def get_ships():
         html = ship_json.get('data').get('html')
         init_ship(html)
 
-    # for ship in ship_list:
-    #     mysql_helper.insert2mysql(ship)
-    #     #     插入公司
-    # Log.d('开始将公司插入数据库')
-    # mysql_helper.insert_manufacturer(manufacturer_list)
+    for ship in ship_list:
+        mysql_helper.insert2mysql(ship)
+        #     插入公司
+    Log.d('开始将公司插入数据库')
+    mysql_helper.insert_manufacturer(manufacturer_list)
 
 
 def init_ship(html):

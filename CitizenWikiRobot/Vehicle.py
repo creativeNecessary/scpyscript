@@ -13,42 +13,35 @@ class Vehicle:
     def __init__(self, url):
         self.data_json = None
         self.id = 12
-        self.production_status = "asd"
-        self.production_note = "asd"
-        self.length = "d"
-        self.beam = "ad"
-        self.height = "f"
-        self.size = "f"
-        self.mass = "f"
-        self.type = "gg"
-        self.cargocapacity = "d"
-        self.min_crew = "d"
-        self.max_crew = "d"
-        self.scm_speed = "da"
-        self.afterburner_speed = "d"
-        self.pitch_max = "sadf"
+        self.production_status = ""
+        self.production_note = ""
+        self.length = ""
+        self.beam = ""
+        self.height = ""
+        self.size = ""
+        self.mass = ""
+        self.type = ""
+        self.cargocapacity = ""
+        self.min_crew = ""
+        self.max_crew = ""
+        self.scm_speed = ""
+        self.afterburner_speed = ""
+        self.pitch_max = ""
         self.yaw_max = ""
         self.roll_max = ""
         self.x_axis_acceleration = ""
         self.y_axis_acceleration = ""
-        self.z_axis_acceleration = "s"
+        self.z_axis_acceleration = ""
         self.manufacturer_code = ""
         self.chassis_id = ""
-        self.time_modified = "s"
-        self.name = "s"
+        self.time_modified = ""
+        self.name = ""
         self.focus = ""
         self.description = ""
         self.url = url
         self.store_large = ""
-        self.image = []
+        self.img_urls = []
         self.ship_equipment_list = []
-
-    # def get_fields_data(self, data_key):
-    #     data = self.fields.get(data_key)
-    #     if data is None:
-    #         return ""
-    #     else:
-    #         return data
 
     def init_ship_equipments(self, rsi_name, equipment_type):
         compiled = self.data_json.get('compiled')
@@ -204,4 +197,3 @@ class Vehicle:
         sql = sql + "  %s )"
 
         return sql
-
