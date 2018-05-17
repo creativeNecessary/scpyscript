@@ -40,39 +40,6 @@ class MysqlHelper:
         cursor.close()
         return False
 
-    def select_ship_equipment(self, ship_equipment):
-        cursor = self.database.cursor()
-        select_sql = "SELECT id FROM ship_equipment_en WHERE tag = %s AND type = %s AND size = %s AND quantity = %s AND ship_id = %s"
-        cursor.execute(select_sql, (self.handle_opt_data(ship_equipment.tag),
-                                    self.handle_opt_data(ship_equipment.type),
-                                    self.handle_opt_data(ship_equipment.size),
-                                    self.handle_opt_data(ship_equipment.quantity),
-                                    self.handle_opt_data(ship_equipment.ship_id)
-                                    ))
-        if cursor.rowcount > 0:
-            data = cursor.fetchone()
-            m_id = data[0]
-            ship_equipment.id = m_id
-        cursor.close()
-
-    def select_equipment(self, equipment):
-        cursor = self.database.cursor()
-        # 先不插入设备的公司
-        # if equipment.manufacturer is not None:
-        #     self.insert_manufacture2mysql(equipment)
-        select_sql = ' SELECT id FROM equipment_en WHERE name = %s AND size = %s AND type = %s AND manufacturer_id = %s '
-        cursor.execute(select_sql, (self.handle_opt_data(equipment.name),
-                                    self.handle_opt_data(equipment.size),
-                                    self.handle_opt_data(equipment.type),
-                                    self.handle_opt_data(equipment.manufacturer_id)
-                                    ))
-        if cursor.rowcount > 0:
-            data = cursor.fetchone()
-            m_id = data[0]
-            equipment.id = m_id
-            Log.d("具体设备ID查询到:" + str(equipment.id))
-        cursor.close()
-
     def select_vehicle(self, vehicle):
         cursor = self.database.cursor()
         select_sql = "SELECT id FROM ship_en WHERE name = %s"
@@ -105,14 +72,14 @@ class MysqlHelper:
         else:
             sql = 'INSERT INTO manufacturer_en (id,code,name,known_for,description,source_url,url) VALUES (%s,%s,%s,%s,%s,%s,%s)'
             cursor.execute(sql, (
-                                 self.handle_opt_data(manufacturer.id),
-                                 self.handle_opt_data(manufacturer.code),
-                                 self.handle_opt_data(manufacturer.name),
-                                 self.handle_opt_data(manufacturer.known_for),
-                                 self.handle_opt_data(manufacturer.description),
-                                 self.handle_opt_data(manufacturer.source_url),
-                                 self.handle_opt_data(manufacturer.url)
-                                 ))
+                self.handle_opt_data(manufacturer.id),
+                self.handle_opt_data(manufacturer.code),
+                self.handle_opt_data(manufacturer.name),
+                self.handle_opt_data(manufacturer.known_for),
+                self.handle_opt_data(manufacturer.description),
+                self.handle_opt_data(manufacturer.source_url),
+                self.handle_opt_data(manufacturer.url)
+            ))
             self.database.commit()
         cursor.close()
 
@@ -239,7 +206,7 @@ class MysqlHelper:
 
     def insert_manufacturer(self, manufacturer_list):
         for manufacturer in manufacturer_list:
-            Log.d('insert公司 '+manufacturer.name)
+            Log.d('insert公司 ' + manufacturer.name)
             self.insert_manufacture2mysql(manufacturer)
 
 # def insert_constant_translate(self):
