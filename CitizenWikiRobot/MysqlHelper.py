@@ -211,7 +211,6 @@ class MysqlHelper:
                                                         ))
 
         self.database.commit()
-        self.select_ship_equipment(ship_equipment)
         cursor.close()
 
     def clear_img_ship_equipment(self):
