@@ -128,7 +128,7 @@ class MysqlHelper:
             Log.d(sql)
             Log.d(type(vehicle.id))
             rows = cursor.execute(sql, (
-                self.handle_opt_data(vehicle.id),
+                int(self.handle_opt_data(vehicle.id)),
                 self.handle_opt_data(vehicle.production_status),
                 self.handle_opt_data(vehicle.production_note),
                 self.handle_opt_data(vehicle.length),
