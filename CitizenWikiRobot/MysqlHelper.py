@@ -162,7 +162,8 @@ class MysqlHelper:
     def insert_ship_equipment(self, ship_equipment):
         # 还是先查询 更新 插入
         cursor = self.database.cursor()
-
+        Log.d("插入装备 " + ship_equipment.type)
+        Log.d(ShipEquipment.get_insert_sql())
         cursor.execute(ShipEquipment.get_insert_sql(), (self.handle_opt_data(ship_equipment.type),
                                                         self.handle_opt_data(ship_equipment.name),
                                                         self.handle_opt_data(ship_equipment.mounts),
