@@ -65,14 +65,14 @@ class MysqlHelper:
                             self.handle_opt_data(manufacturer.description),
                             self.handle_opt_data(manufacturer.source_url),
                             self.handle_opt_data(manufacturer.url),
-                            self.handle_opt_data(manufacturer.id))
+                            int(self.handle_opt_data(manufacturer.id)))
                            )
             self.database.commit()
 
         else:
             sql = 'INSERT INTO manufacturer_en (id,code,name,known_for,description,source_url,url) VALUES (%s,%s,%s,%s,%s,%s,%s)'
             cursor.execute(sql, (
-                self.handle_opt_data(manufacturer.id),
+                int(self.handle_opt_data(manufacturer.id)),
                 self.handle_opt_data(manufacturer.code),
                 self.handle_opt_data(manufacturer.name),
                 self.handle_opt_data(manufacturer.known_for),
@@ -117,7 +117,7 @@ class MysqlHelper:
                 self.handle_opt_data(vehicle.description),
                 self.handle_opt_data(vehicle.url),
                 self.handle_opt_data(vehicle.store_large),
-                self.handle_opt_data(vehicle.id)
+                int(self.handle_opt_data(vehicle.id))
 
             ))
             self.database.commit()
@@ -172,7 +172,7 @@ class MysqlHelper:
                                                         self.handle_opt_data(ship_equipment.quantity),
                                                         self.handle_opt_data(ship_equipment.manufacturer),
                                                         self.handle_opt_data(ship_equipment.component_class),
-                                                        self.handle_opt_data(ship_equipment.ship_id)
+                                                        int(self.handle_opt_data(ship_equipment.ship_id))
                                                         ))
 
         self.database.commit()
