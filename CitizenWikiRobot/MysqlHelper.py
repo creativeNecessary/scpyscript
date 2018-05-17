@@ -69,14 +69,14 @@ class MysqlHelper:
             self.database.commit()
 
         else:
-            sql = 'INSERT INTO manufacturer_en (id,code,name,known_for,description,source_url,url) VALUES (%s,%s,%s,%s,%s,%s)'
+            sql = 'INSERT INTO manufacturer_en (id,code,name,known_for,description,source_url) VALUES (%s,%s,%s,%s,%s,%s)'
             cursor.execute(sql, (
                 int(self.handle_opt_data(manufacturer.id)),
                 self.handle_opt_data(manufacturer.code),
                 self.handle_opt_data(manufacturer.name),
                 self.handle_opt_data(manufacturer.known_for),
                 self.handle_opt_data(manufacturer.description),
-                self.handle_opt_data(manufacturer.source_url),
+                self.handle_opt_data(manufacturer.source_url)
             ))
             self.database.commit()
         cursor.close()
