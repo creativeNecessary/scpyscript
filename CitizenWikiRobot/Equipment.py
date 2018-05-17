@@ -31,7 +31,7 @@ class ShipEquipment:
               + 'ship_id ' \
               + ') VALUE ('
 
-        for time in range(0, 8):
+        for time in range(0, 9):
             sql = sql + ' %s ,'
         sql = sql + '  %s )'
 
