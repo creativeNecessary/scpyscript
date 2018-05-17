@@ -57,20 +57,19 @@ class MysqlHelper:
         cursor = self.database.cursor()
         have_data = self.select_manufacture(manufacturer)
         if have_data:
-            update_sql = 'UPDATE manufacturer_en SET code = %s , name = %s ,known_for = %s , description = %s , source_url = %s  ,url = %s WHERE id = %s'
+            update_sql = 'UPDATE manufacturer_en SET code = %s , name = %s ,known_for = %s , description = %s , source_url = %s   WHERE id = %s'
             cursor.execute(update_sql,
                            (self.handle_opt_data(manufacturer.code),
                             self.handle_opt_data(manufacturer.name),
                             self.handle_opt_data(manufacturer.known_for),
                             self.handle_opt_data(manufacturer.description),
                             self.handle_opt_data(manufacturer.source_url),
-                            self.handle_opt_data(manufacturer.url),
                             int(self.handle_opt_data(manufacturer.id)))
                            )
             self.database.commit()
 
         else:
-            sql = 'INSERT INTO manufacturer_en (id,code,name,known_for,description,source_url,url) VALUES (%s,%s,%s,%s,%s,%s,%s)'
+            sql = 'INSERT INTO manufacturer_en (id,code,name,known_for,description,source_url,url) VALUES (%s,%s,%s,%s,%s,%s)'
             cursor.execute(sql, (
                 int(self.handle_opt_data(manufacturer.id)),
                 self.handle_opt_data(manufacturer.code),
@@ -78,7 +77,6 @@ class MysqlHelper:
                 self.handle_opt_data(manufacturer.known_for),
                 self.handle_opt_data(manufacturer.description),
                 self.handle_opt_data(manufacturer.source_url),
-                self.handle_opt_data(manufacturer.url)
             ))
             self.database.commit()
         cursor.close()

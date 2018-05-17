@@ -46,4 +46,3 @@ class Manufacturer:
         self.known_for = ""
         self.description = ""
         self.source_url = ""
-        self.url = ""
