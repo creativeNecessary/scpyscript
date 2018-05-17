@@ -60,7 +60,7 @@ def init_vehicle(url):
 
 
 def get_ships():
-    # mysql_helper = MysqlHelper()
+    mysql_helper = MysqlHelper()
     page = 1
     ship_json = get_ship_json(page)
     html = ship_json.get('data').get('html')
@@ -76,11 +76,11 @@ def get_ships():
         html = ship_json.get('data').get('html')
         init_ship(html)
 
-    # for ship in ship_list:
-    #     mysql_helper.insert2mysql(ship)
-    #     #     插入公司
-    # Log.d('开始将公司插入数据库')
-    # mysql_helper.insert_manufacturer(manufacturer_list)
+    for ship in ship_list:
+        mysql_helper.insert2mysql(ship)
+        #     插入公司
+    Log.d('开始将公司插入数据库')
+    mysql_helper.insert_manufacturer(manufacturer_list)
 
 
 def init_ship(html):
