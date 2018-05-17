@@ -87,8 +87,8 @@ class MysqlHelper:
         cursor = self.database.cursor()
         have_data = self.select_vehicle(vehicle)
         if have_data:
+            Log.d('Update Ship' + vehicle.name)
             sql = Vehicle.get_update_sql()
-
             rows = cursor.execute(sql, (
                 self.handle_opt_data(vehicle.production_status),
                 self.handle_opt_data(vehicle.production_note),
@@ -123,10 +123,8 @@ class MysqlHelper:
             self.database.commit()
 
         else:
+            Log.d('Insert Ship' + vehicle.name)
             sql = Vehicle.get_insert_sql()
-            Log.d('Insert Ship')
-            Log.d(sql)
-            Log.d(type(vehicle.id))
             rows = cursor.execute(sql, (
                 int(self.handle_opt_data(vehicle.id)),
                 self.handle_opt_data(vehicle.production_status),
