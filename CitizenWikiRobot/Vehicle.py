@@ -104,7 +104,12 @@ class Vehicle:
         manufacturer.name = manufacturer_json.get('name')
         manufacturer.known_for = manufacturer_json.get('known_for')
         manufacturer.description = manufacturer_json.get('description')
-        manufacturer.source_url = manufacturer_json.get('source_url')
+        media_list = manufacturer_json.get('media')
+        if media_list is not None and len(media_list) > 0:
+            manufacturer_media = media_list[0];
+            if manufacturer_media is not None:
+                manufacturer.source_url = manufacturer_media.get('source_url')
+
         from CitizenWikiRobot.ship_robot import append_manufacturer
         append_manufacturer(manufacturer)
         self.manufacturer_code = manufacturer.code
