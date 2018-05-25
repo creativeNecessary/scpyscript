@@ -167,3 +167,15 @@
 # alter  table constant_translate modify  column translate_value  VARCHAR(3000) NOT NULL DEFAULT '';
 # alter  table sc_translate modify  column translate_value  VARCHAR(3000) NOT NULL DEFAULT '';
 
+# CREATE TABLE app_version (
+# id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+# version_code VARCHAR(500) NOT NULL DEFAULT '',
+# version_name VARCHAR(500) NOT NULL DEFAULT '',
+# version_focus VARCHAR(500) NOT NULL DEFAULT '',
+# apk_file_name VARCHAR(500) NOT NULL DEFAULT '',
+# update_time timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+# PRIMARY KEY ( id ));
+
+# INSERT INTO app_version(version_code,version_name,version_focus,apk_file_name) VALUES ('1','1.0.0','FirstVersion','sc_date_view_1.0.0-release.apk');
+
+# INSERT INTO app_version(version_code,version_name,version_focus,apk_file_name) VALUES ('2','1.0.1','Update new Version','sc_date_view_1.0.1-release.apk');

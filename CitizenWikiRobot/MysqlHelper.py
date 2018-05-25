@@ -57,6 +57,7 @@ class MysqlHelper:
         cursor = self.database.cursor()
         have_data = self.select_manufacture(manufacturer)
         if have_data:
+            Log.d('UPDATE公司 ' + manufacturer.name)
             update_sql = 'UPDATE manufacturer_en SET code = %s , name = %s ,known_for = %s , description = %s , source_url = %s   WHERE id = %s'
             cursor.execute(update_sql,
                            (self.handle_opt_data(manufacturer.code),
@@ -69,6 +70,7 @@ class MysqlHelper:
             self.database.commit()
 
         else:
+            Log.d('insert公司 ' + manufacturer.name)
             sql = 'INSERT INTO manufacturer_en (id,code,name,known_for,description,source_url) VALUES (%s,%s,%s,%s,%s,%s)'
             cursor.execute(sql, (
                 int(self.handle_opt_data(manufacturer.id)),
@@ -161,7 +163,6 @@ class MysqlHelper:
         # 还是先查询 更新 插入
         cursor = self.database.cursor()
         Log.d("插入装备 " + ship_equipment.type)
-        Log.d(ShipEquipment.get_insert_sql())
         cursor.execute(ShipEquipment.get_insert_sql(), (self.handle_opt_data(ship_equipment.type),
                                                         self.handle_opt_data(ship_equipment.name),
                                                         self.handle_opt_data(ship_equipment.mounts),
@@ -195,7 +196,6 @@ class MysqlHelper:
         cursor.close()
 
     def insert2mysql(self, vehicle):
-        Log.d('insertShip ' + vehicle.name)
         self.insert_vehicle2mysql(vehicle)
         self.insert_img(vehicle)
         for equip in vehicle.ship_equipment_list:
@@ -203,7 +203,6 @@ class MysqlHelper:
 
     def insert_manufacturer(self, manufacturer_list):
         for manufacturer in manufacturer_list:
-            Log.d('insert公司 ' + manufacturer.name)
             self.insert_manufacture2mysql(manufacturer)
 
 # def insert_constant_translate(self):
