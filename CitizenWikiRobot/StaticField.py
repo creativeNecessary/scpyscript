@@ -9,11 +9,7 @@ class StaticField:
     def __init__(self):
         print ""
 
-    TEST_SHIP_URL = "https://starcitizen.tools/Avenger_Stalker"
-    ERROR_COMPANY = ["/Roberts_Space_Industries_(manufacturer)"]
-    CORRECT_COMPANY = ["/Roberts_Space_Industries"]
     BASE_URL = "https://robertsspaceindustries.com"
-    COMPANY_PRODUCTS_SHIPS = "Ships"
     BASE_SHIP_URL = "https://starcitizen.tools/Ships"
     CTM_MODEL_PATH = "/home/ftpuser/ctmfiles/"
     IMAGE_PATH = "/var/www/html/scdata/resources/media/image/"

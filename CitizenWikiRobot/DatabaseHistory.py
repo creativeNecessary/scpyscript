@@ -179,3 +179,23 @@
 # INSERT INTO app_version(version_code,version_name,version_focus,apk_file_name) VALUES ('1','1.0.0','FirstVersion','sc_date_view_1.0.0-release.apk');
 
 # INSERT INTO app_version(version_code,version_name,version_focus,apk_file_name) VALUES ('2','1.0.1','Update new Version','sc_date_view_1.0.1-release.apk');
+
+# CREATE TABLE comm_link (
+# id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+# url VARCHAR(3000) NOT NULL DEFAULT '',
+# background VARCHAR(3000) NOT NULL DEFAULT '',
+# title VARCHAR(3000) NOT NULL DEFAULT '',
+# type VARCHAR(3000) NOT NULL DEFAULT '',
+# update_time timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+# PRIMARY KEY ( id ));
+#
+# CREATE TABLE comm_link_content (
+# id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+# data_index INT NOT NULL DEFAULT -1,
+# comm_link_id VARCHAR(100) NOT NULL DEFAULT '',
+# content_type VARCHAR(100) NOT NULL DEFAULT '',
+# content_data VARCHAR(3000) CHARACTER SET utf8 NOT NULL DEFAULT '' ,
+# machine_translate_data VARCHAR(3000) CHARACTER SET utf8 NOT NULL DEFAULT '' ,
+# human_translate_data VARCHAR(3000) CHARACTER SET utf8 NOT NULL DEFAULT '' ,
+# update_time timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+# PRIMARY KEY ( id ));
