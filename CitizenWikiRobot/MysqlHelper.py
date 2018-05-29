@@ -212,9 +212,9 @@ class MysqlHelper:
         select_sql = "SELECT id FROM comm_link WHERE url = %s "
         cursor.execute(select_sql, comm_link.url)
         if cursor.rowcount > 0:
-            data = cursor.fetchone()
-            m_id = data[0]
-            Log.d(m_id)
+            Log.d("--------------------cursor.rowcount >>>>>>>> 0")
+        else:
+            Log.d("--------------------cursor.rowcount <<<<<< 0")
 
 # def insert_constant_translate(self):
 #     for key in StaticField.SHIP_NAME_MAP.keys():
