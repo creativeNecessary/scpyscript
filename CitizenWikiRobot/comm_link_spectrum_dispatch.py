@@ -19,7 +19,7 @@ sys.setdefaultencoding('utf-8')
 
 def get_galactic_guide():
     mysql_helper = MysqlHelper()
-
+    s = requests.Session()
     url = 'https://robertsspaceindustries.com/api/hub/getCommlinkItems'
     road_header = {
         'x-rsi-token': '6ec0661bc4216ad2b6017727e59349e7',
@@ -30,7 +30,7 @@ def get_galactic_guide():
     }
     for page in range(0, 6):
         pamas = {"channel": "spectrum-dispatch", "page": str(page), "series": "galactic-guide", "sort": "publish_new"}
-        galactic_guide_req = requests.post(url=url, data=pamas, headers=road_header)
+        galactic_guide_req = s.post(url=url, data=pamas, headers=road_header)
         galactic_guide_json = json.loads(galactic_guide_req.content)
         data = galactic_guide_json['data']
         guide_soup = bs4.BeautifulSoup(data, "lxml")
@@ -78,7 +78,7 @@ def get_galactic_guide():
 
 def get_comm_link_content(comm_link, content_list):
     from CitizenWikiRobot.translate_util import TransLateUtil
-    translate_util = TransLateUtil('a')
+    # translate_util = TransLateUtil('a')
 
     for sub_content in content_list:
         if sub_content is None or isinstance(sub_content, NavigableString):
@@ -92,8 +92,8 @@ def get_comm_link_content(comm_link, content_list):
                     comm_content.content_type = "title"
                 if name == 'p':
                     comm_content.content_data = sub_content.text
-                    translate_util.need_translate_data = sub_content.text
-                    comm_content.machine_translate_data = translate_util.translate()
+                    # translate_util.need_translate_data = sub_content.text
+                    # comm_content.machine_translate_data = translate_util.translate()
                     comm_content.content_type = "content"
 
                 comm_link.content.append(comm_content)
