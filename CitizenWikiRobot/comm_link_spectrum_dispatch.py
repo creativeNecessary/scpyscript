@@ -20,7 +20,6 @@ sys.setdefaultencoding('utf-8')
 def get_galactic_guide():
     # mysql_helper = MysqlHelper()
 
-
     url = 'https://robertsspaceindustries.com/api/hub/getCommlinkItems'
     road_header = {
         'x-rsi-token': '6ec0661bc4216ad2b6017727e59349e7',
