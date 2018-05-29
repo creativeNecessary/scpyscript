@@ -18,10 +18,11 @@ sys.setdefaultencoding('utf-8')
 
 
 def get_galactic_guide():
-    mysql_helper = MysqlHelper()
+    # mysql_helper = MysqlHelper()
     s = requests.Session()
     url = 'https://robertsspaceindustries.com/api/hub/getCommlinkItems'
     road_header = {
+        'Connection': 'close',
         'x-rsi-token': '6ec0661bc4216ad2b6017727e59349e7',
         'accept': 'application/json',
         'accept-encoding': 'gzip, deflate, br',
@@ -71,7 +72,7 @@ def get_galactic_guide():
                     get_comm_link_content(comm_link, div.children)
             else:
                 get_comm_link_content(comm_link, content_tag.children)
-            mysql_helper.insert_comm_link(comm_link)
+            # mysql_helper.insert_comm_link(comm_link)
 
             Log.d(title)
 
