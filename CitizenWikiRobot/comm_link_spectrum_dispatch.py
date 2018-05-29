@@ -18,7 +18,7 @@ sys.setdefaultencoding('utf-8')
 
 
 def get_galactic_guide():
-    mysql_helper = MysqlHelper()
+    # mysql_helper = MysqlHelper()
 
 
     url = 'https://robertsspaceindustries.com/api/hub/getCommlinkItems'
@@ -72,7 +72,7 @@ def get_galactic_guide():
                     get_comm_link_content(comm_link, div.children)
             else:
                 get_comm_link_content(comm_link, content_tag.children)
-            mysql_helper.insert_comm_link(comm_link)
+            # mysql_helper.insert_comm_link(comm_link)
 
             Log.d(title)
 

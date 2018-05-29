@@ -52,11 +52,12 @@ class TransLateUtil:
         resp = s.post(self.url, headers=self.headers, data=data)
         json_dump = json.dumps(resp.json())
         json_data = json.loads(json_dump)
-        translateResult = json_data['translateResult']
+        translate_result = json_data['translateResult']
         result = ""
-        for result_item in translateResult:
-            for item in result_item:
-                ch = item['tgt']
-                result = result + ch
+        if translate_result is not None:
+            for result_item in translate_result:
+                for item in result_item:
+                    ch = item['tgt']
+                    result = result + ch
 
         return result
