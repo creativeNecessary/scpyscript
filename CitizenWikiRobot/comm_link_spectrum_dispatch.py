@@ -7,8 +7,6 @@ from CitizenWikiRobot.Log import Log
 from CitizenWikiRobot.comm_link import CommLink
 from CitizenWikiRobot.comm_link import CommLinkContent
 from CitizenWikiRobot.MysqlHelper import MysqlHelper
-import hashlib
-import random
 import time
 import sys
 import bs4
@@ -30,6 +28,8 @@ def get_galactic_guide():
         'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8'
     }
     for page in range(0, 6):
+        if page > 0:
+            time.sleep(5)
         pamas = {"channel": "spectrum-dispatch", "page": str(page), "series": "galactic-guide", "sort": "publish_new"}
         galactic_guide_req = s.post(url=url, data=pamas, headers=road_header)
         galactic_guide_json = json.loads(galactic_guide_req.content)
