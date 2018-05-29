@@ -16,7 +16,7 @@ sys.setdefaultencoding('utf-8')
 
 
 def get_galactic_guide():
-    mysql_helper = MysqlHelper()
+    # mysql_helper = MysqlHelper()
     s = requests.Session()
     url = 'https://robertsspaceindustries.com/api/hub/getCommlinkItems'
     road_header = {
@@ -28,10 +28,20 @@ def get_galactic_guide():
         'accept-language': 'zh-CN,zh;q=0.9,en;q=0.8'
     }
     for page in range(0, 6):
-        if page > 0:
-            time.sleep(5)
+        galactic_guide_req = ''
         pamas = {"channel": "spectrum-dispatch", "page": str(page), "series": "galactic-guide", "sort": "publish_new"}
-        galactic_guide_req = s.post(url=url, data=pamas, headers=road_header)
+        while galactic_guide_req == '':
+            try:
+                galactic_guide_req = s.post(url=url, data=pamas, headers=road_header)
+
+            except:
+                print("Connection refused by the server..")
+                print("Let me sleep for 5 seconds")
+                print("ZZzzzz...")
+                time.sleep(5)
+                print("Was a nice sleep, now let me continue...")
+                continue
+
         galactic_guide_json = json.loads(galactic_guide_req.content)
         data = galactic_guide_json['data']
         guide_soup = bs4.BeautifulSoup(data, "lxml")
@@ -72,7 +82,7 @@ def get_galactic_guide():
                     get_comm_link_content(comm_link, div.children)
             else:
                 get_comm_link_content(comm_link, content_tag.children)
-            mysql_helper.insert_comm_link(comm_link)
+            # mysql_helper.insert_comm_link(comm_link)
 
             Log.d(title)
 
