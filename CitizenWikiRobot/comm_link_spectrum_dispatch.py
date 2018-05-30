@@ -56,6 +56,7 @@ def get_galactic_guide():
             title_tag = link.find('div', class_='title trans-opacity trans-03s')
             title = title_tag.string
             comm_link = CommLink()
+            comm_link.type = 'Galactic Guide'
             comm_link.url = guide_url
             comm_link.title = title
             comm_link.background = background
