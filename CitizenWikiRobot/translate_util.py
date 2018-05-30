@@ -50,7 +50,10 @@ class TransLateUtil:
             'typoResult': 'false'
         }
         resp = s.post(self.url, headers=self.headers, data=data)
-        json_dump = json.dumps(resp.json())
+        try:
+            json_dump = json.dumps(resp.json())
+        except ValueError:
+            return ""
         json_data = json.loads(json_dump)
         result = ""
         if 'translateResult' in json_data:
