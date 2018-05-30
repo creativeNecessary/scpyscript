@@ -60,8 +60,18 @@ def get_galactic_guide():
             comm_link.url = guide_url
             comm_link.title = title
             comm_link.background = background
+            link_page = ''
+            while link_page == '':
+                try:
+                    link_page = requests.get(StaticField.BASE_URL + guide_url)
+                except:
+                    print("Connection refused by the server..")
+                    print("Let me sleep for 5 seconds")
+                    print("ZZzzzz...")
+                    time.sleep(5)
+                    print("Was a nice sleep, now let me continue...")
+                    continue
 
-            link_page = requests.get(StaticField.BASE_URL + guide_url)
             link_soup = bs4.BeautifulSoup(link_page.content, "lxml")
 
             content_block1_tag = link_soup.find('div', class_='content-block1 rsi-markup')
