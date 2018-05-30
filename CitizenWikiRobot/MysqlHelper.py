@@ -246,7 +246,7 @@ class MysqlHelper:
             cursor.execute(delete_sql, comm_link.id)
         for content in comm_link.content:
             select_item = "SELECT id FROM comm_link_content WHERE comm_link_id = %s AND data_index = %s"
-            cursor.execute(select_item, (comm_link.id, content.index))
+            cursor.execute(select_item, (comm_link.id, content.data_index))
             if cursor.rowcount <= 0:
                 Log.d("未查询到链接内容 插入--")
                 insert_item_sql = "INSERT INTO comm_link_content (data_index , comm_link_id , content_type , content_data , machine_translate_data , human_translate_data) VALUE (%s , %s , %s, %s, %s, %s )"
