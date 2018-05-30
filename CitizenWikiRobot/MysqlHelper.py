@@ -212,10 +212,56 @@ class MysqlHelper:
         select_sql = "SELECT id FROM comm_link WHERE url = %s "
         cursor.execute(select_sql, comm_link.url)
         if cursor.rowcount > 0:
-            Log.d("--------------------cursor.rowcount >>>>>>>> 0")
-        else:
-            Log.d("--------------------cursor.rowcount <<<<<< 0")
+            Log.d("update comm_link ")
+            Log.d(comm_link.title)
+            # 有数据 update
+            data = cursor.fetchone()
+            m_id = data[0]
+            comm_link.id = m_id
+            update_sql = 'UPDATE comm_link SET url = %s , background = %s ,title = %s , type = %s  WHERE id = %s'
+            cursor.execute(update_sql, (comm_link.url, comm_link.background, comm_link.title, comm_link.type, m_id))
 
+        else:
+            # 无数据 insert
+            Log.d("insert comm_link ")
+            Log.d(comm_link.title)
+            insert_sql = "INSERT INTO comm_link (url , background , title , type) VALUE (%s , %s , %s, %s)"
+            cursor.execute(insert_sql, (comm_link.url, comm_link.background, comm_link.title, comm_link.type))
+
+            comm_link.id = cursor.lastrowid
+
+        self.database.commit()
+        cursor.close()
+        self.insert_comm_link_content(comm_link)
+
+    def insert_comm_link_content(self, comm_link):
+        cursor = self.database.cursor()
+        select_sql = "SELECT id FROM comm_link_content WHERE comm_link_id = %s "
+        cursor.execute(select_sql, comm_link.id)
+        count = cursor.rowcount
+        if count != len(comm_link.content):
+            Log.d("链接内容与数据库不符合 删除重新插入! ")
+            # 删除旧的
+            delete_sql = "DELETE FROM comm_link_content WHERE comm_link_id = %s"
+            cursor.execute(delete_sql, comm_link.id)
+        for content in comm_link.content:
+            select_item = "SELECT id FROM comm_link_content WHERE comm_link_id = %s AND data_index = %s"
+            cursor.execute(select_item, (comm_link.id, content.index))
+            if cursor.rowcount <= 0:
+                Log.d("未查询到链接内容 插入--")
+                insert_item_sql = "INSERT INTO comm_link_content (data_index , comm_link_id , content_type , content_data , machine_translate_data , human_translate_data) VALUE (%s , %s , %s, %s, %s, %s )"
+                cursor.execute(insert_item_sql, (
+                    content.data_index, comm_link.id, content.content_type, content.content_data,
+                    content.machine_translate_data, content.human_translate_data))
+
+            else:
+                Log.d("查询到链接内容 更新--")
+                update_item_sql = "UPDATE comm_link_content SET content_type = %s , content_data = %s ,machine_translate_data = %s , human_translate_data = %s  WHERE comm_link_id = %s AND data_index = %s"
+                cursor.execute(update_item_sql, (content.content_type, content.content_data,
+                                                 content.machine_translate_data, content.human_translate_data,
+                                                 comm_link.id, content.data_index))
+            self.database.commit()
+        cursor.close()
 # def insert_constant_translate(self):
 #     for key in StaticField.SHIP_NAME_MAP.keys():
 #         sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"

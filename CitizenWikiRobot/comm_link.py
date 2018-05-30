@@ -9,6 +9,7 @@ sys.setdefaultencoding('utf-8')
 
 class CommLink:
     def __init__(self):
+        self.id = -1
         self.url = ""
         self.background = ""
         self.title = ""
@@ -18,8 +19,7 @@ class CommLink:
 
 class CommLinkContent:
     def __init__(self):
-        self.comm_link_id = -1
-        self.index = -1
+        self.data_index = -1
         self.content_type = ""
         self.content_data = ""
         self.machine_translate_data = ""
