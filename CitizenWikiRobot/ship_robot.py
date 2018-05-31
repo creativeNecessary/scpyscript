@@ -21,7 +21,18 @@ chassis_id_list = []
 
 def init_vehicle(url):
     vehicle = Vehicle(url)
-    page = requests.get(StaticField.BASE_URL + vehicle.url)
+    page = ''
+    while page == '':
+        try:
+            page = requests.get(StaticField.BASE_URL + vehicle.url)
+        except:
+            print("Connection refused by the server..")
+            print("Let me sleep for 5 seconds")
+            print("ZZzzzz...")
+            time.sleep(5)
+            print("Was a nice sleep, now let me continue...")
+            continue
+
     ship_soup = bs4.BeautifulSoup(page.content, "lxml")
 
     all_script_tag = ship_soup.find_all('script')
