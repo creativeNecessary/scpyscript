@@ -55,7 +55,6 @@ def init_vehicle(url):
 
         vehicle.img_urls = img_urls
 
-    mysql_helper.insert2mysql(vehicle)
     ship_list.append(vehicle)
 
 
