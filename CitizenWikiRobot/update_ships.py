@@ -7,4 +7,3 @@ if __name__ == '__main__':
     get_ships()
     # init_road_map()
     # get_galactic_guide()
-

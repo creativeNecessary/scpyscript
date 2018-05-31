@@ -61,6 +61,7 @@ def init_vehicle(url):
 
 def get_ships():
     mysql_helper = MysqlHelper()
+    mysql_helper.clear_img_ship_equipment()
     page = 1
     ship_json = get_ship_json(page)
     html = ship_json.get('data').get('html')

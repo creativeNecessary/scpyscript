@@ -19,7 +19,6 @@ class MysqlHelper:
         self.database = pymysql.connect(host='localhost', user=ProjectConfig.user, passwd=ProjectConfig.passwd,
                                         db=ProjectConfig.db, charset=ProjectConfig.charset)
         # 清除挂点数据与图片数据
-        self.clear_img_ship_equipment()
 
     @staticmethod
     def handle_opt_data(data):
