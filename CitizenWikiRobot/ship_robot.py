@@ -10,6 +10,7 @@ import json
 from CitizenWikiRobot.Log import Log
 import progressbar
 import os
+import time
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -32,7 +33,18 @@ def init_vehicle(url):
     end_index = chassis_id_content.find('}')
     chassis_id = chassis_id_content[start_index + 1: end_index]
     id_url = 'https://robertsspaceindustries.com/ship-matrix/index?chassis_id=' + chassis_id
-    ships_req = requests.get(url=id_url)
+    ships_req = ''
+    while ships_req == '':
+        try:
+            ships_req = requests.get(url=id_url)
+        except:
+            print("Connection refused by the server..")
+            print("Let me sleep for 5 seconds")
+            print("ZZzzzz...")
+            time.sleep(5)
+            print("Was a nice sleep, now let me continue...")
+            continue
+
     content_json = json.loads(ships_req.content)
     data = content_json.get('data')
     for ship_item in data:
