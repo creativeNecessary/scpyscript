@@ -6,6 +6,7 @@ import time
 import json
 import sys
 from CitizenWikiRobot.Log import Log
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -14,14 +15,14 @@ m = hashlib.md5()
 
 
 class TransLateUtil:
-    def __init__(self, need_translate_data):
-        self.need_translate_data = need_translate_data
+
+    def __init__(self):
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0',
             'Referer': 'http://fanyi.youdao.com/',
             'contentType': 'application/x-www-form-urlencoded; charset=UTF-8'
         }
-        self.url = 'http://fanyi.youdao.com/translate_o?smartresult=dict&smartresult=rule&sessionFrom='
+        self.url = 'http://fanyi.youdao.com/translate?smartresult=dict&smartresult=rule&sessionFrom='
         self.base_config()
 
     def base_config(self):
@@ -30,13 +31,23 @@ class TransLateUtil:
         """
         s.get('http://fanyi.youdao.com/')
 
-    def translate(self):
+    def machine_translate(self, data):
+        data_array = data.split('.')
+        result = ""
+        for translate_data in data_array:
+            if translate_data == '':
+                continue
+            time.sleep(2)
+            result = result + self.translate(translate_data)
+        return result
+
+    def translate(self, need_translate_data):
         salf = str(int(time.time() * 1000) + random.randint(0, 9))
-        n = 'fanyideskweb' + self.need_translate_data + salf + "rY0D^0'nM0}g5Mm1z%1G4"
+        n = 'fanyideskweb' + need_translate_data + salf + "rY0D^0'nM0}g5Mm1z%1G4"
         m.update(n.encode('utf-8'))
         sign = m.hexdigest()
         data = {
-            'i': self.need_translate_data,
+            'i': need_translate_data,
             'from': 'AUTO',
             'to': 'AUTO',
             'smartresult': 'dict',
