@@ -86,6 +86,7 @@ def get_ships():
         html = ship_json.get('data').get('html')
         init_ship(html)
 
+    mysql_helper.clear_img_ship_equipment()
     for ship in ship_list:
         mysql_helper.insert2mysql(ship)
         #     插入公司
@@ -107,7 +108,19 @@ def init_ship(html):
 def get_ship_json(page):
     url = "https://robertsspaceindustries.com/api/store/getShips"
     pamas = {"itemType": "ships", "page": str(page), "sort": "store", "storefront": "pledge"}
-    ships_req = requests.post(url=url, data=pamas)
+
+    ships_req = ''
+    while ships_req == '':
+        try:
+            ships_req = requests.post(url=url, data=pamas)
+        except:
+            print("Connection refused by the server..")
+            print("Let me sleep for 5 seconds")
+            print("ZZzzzz...")
+            time.sleep(5)
+            print("Was a nice sleep, now let me continue...")
+            continue
+
     ships_json = json.loads(ships_req.content)
     code = ships_json.get('code')
     msg = ships_json.get('msg')
