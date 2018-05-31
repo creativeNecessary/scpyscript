@@ -116,6 +116,7 @@ def get_comm_link_content(comm_link, content_list):
                     comm_content.content_data = sub_content.text
                     translate_util.need_translate_data = sub_content.text
                     comm_content.machine_translate_data = translate_util.translate()
+                    Log.d(comm_content.machine_translate_data)
                     comm_content.content_type = "content"
                 comm_content.data_index = len(comm_link.content)
                 comm_link.content.append(comm_content)
