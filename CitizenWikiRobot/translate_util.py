@@ -5,7 +5,7 @@ import requests
 import time
 import json
 import sys
-
+from CitizenWikiRobot.Log import Log
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -50,6 +50,7 @@ class TransLateUtil:
             'typoResult': 'false'
         }
         resp = s.post(self.url, headers=self.headers, data=data)
+        Log.d(resp)
         try:
             json_dump = json.dumps(resp.json())
         except ValueError:
