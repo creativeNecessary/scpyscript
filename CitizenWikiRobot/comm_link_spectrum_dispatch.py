@@ -16,7 +16,7 @@ sys.setdefaultencoding('utf-8')
 
 
 def get_galactic_guide():
-    # mysql_helper = MysqlHelper()
+    mysql_helper = MysqlHelper()
     s = requests.Session()
     url = 'https://robertsspaceindustries.com/api/hub/getCommlinkItems'
     road_header = {
@@ -94,14 +94,12 @@ def get_galactic_guide():
                     get_comm_link_content(comm_link, div.children)
             else:
                 get_comm_link_content(comm_link, content_tag.children)
-            # mysql_helper.insert_comm_link(comm_link)
+            mysql_helper.insert_comm_link(comm_link)
 
             Log.d(title)
 
 
 def get_comm_link_content(comm_link, content_list):
-    from CitizenWikiRobot.translate_util import TransLateUtil
-    translate_util = TransLateUtil('a')
     for sub_content in content_list:
         if sub_content is None or isinstance(sub_content, NavigableString):
             continue
@@ -114,9 +112,6 @@ def get_comm_link_content(comm_link, content_list):
                     comm_content.content_type = "title"
                 if name == 'p':
                     comm_content.content_data = sub_content.text
-                    translate_util.need_translate_data = sub_content.text
-                    comm_content.machine_translate_data = translate_util.translate()
-                    Log.d(comm_content.machine_translate_data)
                     comm_content.content_type = "content"
                 comm_content.data_index = len(comm_link.content)
                 comm_link.content.append(comm_content)
