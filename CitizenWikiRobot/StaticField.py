@@ -212,7 +212,6 @@ class StaticField:
     # SHIP_TYPE_MAP['Refuelling'] = '加油机'
     # SHIP_TYPE_MAP['Gun Ship'] = '炮艇'
 
-
     SHIP_TYPE_MAP['Fighter'] = '战斗机'
     SHIP_TYPE_MAP['Expedition'] = '探险'
     SHIP_TYPE_MAP['Starter'] = '初始'

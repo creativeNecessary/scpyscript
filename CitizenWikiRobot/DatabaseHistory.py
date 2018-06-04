@@ -206,3 +206,10 @@
 # type_content VARCHAR(100) NOT NULL DEFAULT '',
 # update_time timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 # PRIMARY KEY ( id ));
+
+# DELETE FROM ship_en  WHERE name = 'AEGIS Hammerhead';
+# DELETE FROM ship_en  WHERE name = 'ANVIL Hawk';
+# DELETE FROM ship_en  WHERE name = 'AEGIS Vulcan';
+# DELETE FROM ship_en  WHERE name = 'Tumbril - Nova Tank';
+
+
