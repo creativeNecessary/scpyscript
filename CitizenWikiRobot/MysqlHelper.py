@@ -202,9 +202,9 @@ class MysqlHelper:
         # 更新载具装备
         # 先删除旧的装备
         cursor = self.database.cursor()
-        delete_sql = "DELETE FROM ship_equipment_en WHERE ship_id = %s"
+        delete_sql = "DELETE FROM ship_equipment_en WHERE ship_id = %s "
         cursor.execute(delete_sql, vehicle.id)
-        Log.d("删除了 : "+cursor.rowcount)
+        Log.d("删除了 : "+str(cursor.rowcount))
         self.database.commit()
         cursor.close()
 
