@@ -119,7 +119,7 @@ class MysqlHelper:
                 int(self.handle_opt_data(vehicle.id))
 
             ))
-            vehicle.id = cursor.lastrowid
+
             self.database.commit()
 
         else:
@@ -156,6 +156,7 @@ class MysqlHelper:
                 self.handle_opt_data(vehicle.store_large)
             ))
             self.database.commit()
+            vehicle.id = cursor.lastrowid
         cursor.close()
         # 给所有的设备赋值飞船id
 
