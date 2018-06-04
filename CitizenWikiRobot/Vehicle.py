@@ -4,6 +4,7 @@ from CitizenWikiRobot.Equipment import Manufacturer, ShipEquipment
 
 
 class Vehicle:
+    ship_type_list = []
     EQUIPMENT_AVIONICS = 1
     EQUIPMENT_MODULAR = 2
     EQUIPMENT_PROPULSION = 3
@@ -96,6 +97,14 @@ class Vehicle:
                 self.store_large = images.get('store_large')
 
         Log.d('Loading Ship ' + self.name)
+        if self.focus is not None:
+            if self.focus not in Vehicle.ship_type_list:
+                Vehicle.ship_type_list.append(self.focus)
+            Log.d('Ship Type ' + self.focus)
+
+        from CitizenWikiRobot.StaticField import StaticField
+        if self.name not in StaticField.SHIP_NAME_MAP:
+            Log.d('Do not have  ' + self.name + ' translate')
 
         manufacturer_json = self.data_json.get('manufacturer')
         manufacturer = Manufacturer()
@@ -129,6 +138,7 @@ class Vehicle:
         self.init_ship_equipments('RSIWeapon', 'turrets')
         self.init_ship_equipments('RSIWeapon', 'missiles')
         self.init_ship_equipments('RSIWeapon', 'utility_items')
+
 
     @staticmethod
     def get_update_sql():

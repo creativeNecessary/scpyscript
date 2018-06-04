@@ -20,6 +20,7 @@ class StaticField:
     COMPANY_MAP = dict()
     SHIP_GROUP = dict()
     CONSTANT_GROUP = dict()
+    SHIP_TYPE_MAP = dict()
 
     Radar = "radar"
     Computers = "computers"
@@ -60,11 +61,12 @@ class StaticField:
     COMPANY_MAP['AopoA'] = 'AopoA'
     COMPANY_MAP['ARGO Astronautics'] = 'ARGO'
     COMPANY_MAP['Banu'] = '巴奴'
+    COMPANY_MAP['Tumbril'] = '敦博尔'
     COMPANY_MAP['Consolidated Outland'] = '联合外域'
     COMPANY_MAP['Crusader Industries'] = '十字军'
     COMPANY_MAP['Drake Interplanetary'] = '德雷克'
     COMPANY_MAP['Esperia Inc.'] = '埃斯佩拉'
-    COMPANY_MAP['Kruger Intergalactic'] = '克鲁格'
+    COMPANY_MAP['Kruger Intergalactic'] = '克鲁格星际'
     COMPANY_MAP['Musashi Industrial and Starflight Concern'] = '武藏工业'
     COMPANY_MAP['Origin Jumpworks GmbH'] = '起源跳跃'
     COMPANY_MAP['Roberts Space Industries'] = '罗伯茨太空工业'
@@ -76,14 +78,15 @@ class StaticField:
     SHIP_NAME_MAP['Eclipse'] = '日蚀'
     SHIP_NAME_MAP['Gladius'] = '短剑'
     SHIP_NAME_MAP['Gladius Valiant'] = '短剑勇士'
-    SHIP_NAME_MAP['AEGIS Hammerhead'] = '锤头鲨'
+    SHIP_NAME_MAP['Hammerhead'] = '锤头鲨'
     SHIP_NAME_MAP['Idris-M'] = '伊德里斯M'
     SHIP_NAME_MAP['Idris-P'] = '伊德里斯P'
     SHIP_NAME_MAP['Javelin'] = '标枪'
     SHIP_NAME_MAP['N6G Avenger Trainer'] = '复仇者教练'
     SHIP_NAME_MAP['Reclaimer'] = '再生者'
     SHIP_NAME_MAP['Redeemer'] = '救赎'
-    SHIP_NAME_MAP['Retaliator'] = '报复'
+    SHIP_NAME_MAP['Retaliator Base'] = '报复基础型'
+    SHIP_NAME_MAP['Retaliator Bomber'] = '报复轰炸型'
     SHIP_NAME_MAP['Sabre'] = '军刀'
     SHIP_NAME_MAP['Sabre Comet'] = '军刀彗星'
     SHIP_NAME_MAP['Sabre Raven'] = '军刀渡鸦'
@@ -104,7 +107,7 @@ class StaticField:
     SHIP_NAME_MAP['F7C-S Hornet Ghost'] = '大黄蜂幽灵'
     SHIP_NAME_MAP['F8 Lightning'] = 'F8闪电'
     SHIP_NAME_MAP['Gladiator'] = '角斗士'
-    SHIP_NAME_MAP['ANVIL Hawk'] = '鹰'
+    SHIP_NAME_MAP['Hawk'] = '鹰'
     SHIP_NAME_MAP['Hurricane'] = '飓风'
     SHIP_NAME_MAP['ShadowHawk'] = 'ShadowHawk'
     SHIP_NAME_MAP['T8A Gladiator'] = 'T8A角斗士'
@@ -122,7 +125,7 @@ class StaticField:
     SHIP_NAME_MAP['Mustang Gamma'] = '野马G'
     SHIP_NAME_MAP['Mustang Omega'] = '野马O'
     SHIP_NAME_MAP['Pioneer'] = '开拓者'
-    SHIP_NAME_MAP['Genesis'] = '创世纪'
+    SHIP_NAME_MAP['Genesis Starliner'] = '创世纪'
     SHIP_NAME_MAP['Buccaneer'] = '掠夺者'
     SHIP_NAME_MAP['Caterpillar'] = '毛虫'
     SHIP_NAME_MAP['Caterpillar Pirate Edition'] = '毛虫还盗版'
@@ -133,10 +136,10 @@ class StaticField:
     SHIP_NAME_MAP['Dragonfly Yellowjacket'] = '黄蜻蜓'
     SHIP_NAME_MAP['Dragonfly Black'] = '黑蜻蜓'
     SHIP_NAME_MAP['Herald'] = '信使'
-    SHIP_NAME_MAP['Blade (replica)'] = '刀锋'
-    SHIP_NAME_MAP['Glaive (replica)'] = '长刀'
+    SHIP_NAME_MAP['Blade'] = '刀锋'
+    SHIP_NAME_MAP['Glaive'] = '长刀'
     SHIP_NAME_MAP['Prowler'] = '徘徊'
-    SHIP_NAME_MAP['Scythe (replica)'] = '死镰'
+    SHIP_NAME_MAP['Scythe'] = '死镰'
     SHIP_NAME_MAP['P52 Merlin'] = 'P52梅林'
     SHIP_NAME_MAP['P72 Archimedes'] = 'P72'
     SHIP_NAME_MAP['Endeavor'] = '奋进'
@@ -166,7 +169,7 @@ class StaticField:
     SHIP_NAME_MAP['85X'] = '85X'
     SHIP_NAME_MAP['890 Jump'] = '890'
     SHIP_NAME_MAP['M50'] = 'M50'
-    SHIP_NAME_MAP['X1'] = 'X1'
+    SHIP_NAME_MAP['X1 Base'] = 'X1基础型'
     SHIP_NAME_MAP['X1 Force'] = 'X1F'
     SHIP_NAME_MAP['X1 Velocity'] = 'X1V'
     SHIP_NAME_MAP['Aurora CL'] = '极光CL'
@@ -188,8 +191,113 @@ class StaticField:
     SHIP_NAME_MAP['Merchantman'] = '巴奴商船'
     SHIP_NAME_MAP['Khartu-Al'] = '卡图AL'
     SHIP_NAME_MAP['Constellation Phoenix Emerald'] = '翡翠凤凰座'
-    SHIP_NAME_MAP['AEGIS Vulcan'] = '火神'
-    SHIP_NAME_MAP['Tumbril - Nova Tank'] = 'Nova Tank'
+    SHIP_NAME_MAP['Vulcan'] = '火神'
+    SHIP_NAME_MAP['Nova Tank'] = 'Nova 坦克'
+    SHIP_NAME_MAP['Ursa Rover'] = '大熊座'
+    SHIP_NAME_MAP['Cyclone'] = '旋风'
+    SHIP_NAME_MAP['Cyclone-TR'] = 'Cyclone-TR(机枪)'
+    SHIP_NAME_MAP['Cyclone-RC'] = 'Cyclone-RC'
+    SHIP_NAME_MAP['Cyclone-RN'] = 'Cyclone-RN(扩展功能)'
+    SHIP_NAME_MAP['Cyclone-AA'] = 'Cyclone-AA(导弹)'
+    SHIP_NAME_MAP['Razor EX'] = '剃刀-EX'
+    SHIP_NAME_MAP['Razor LX'] = '剃刀-LX'
+    SHIP_NAME_MAP['100i'] = '100i'
+    SHIP_NAME_MAP['125a'] = '125a'
+    SHIP_NAME_MAP['135c'] = '135c'
+    SHIP_NAME_MAP['C2 Hercules'] = '大力神C2'
+    SHIP_NAME_MAP['M2 Hercules'] = '大力神M2'
+    SHIP_NAME_MAP['A2 Hercules'] = '大力神A2'
+
+    # Fighter
+    # SHIP_TYPE_MAP['Refuelling'] = '加油机'
+    # SHIP_TYPE_MAP['Gun Ship'] = '炮艇'
+
+
+    SHIP_TYPE_MAP['Fighter'] = '战斗机'
+    SHIP_TYPE_MAP['Expedition'] = '探险'
+    SHIP_TYPE_MAP['Starter'] = '初始'
+    SHIP_TYPE_MAP['Freight'] = '货运'
+    SHIP_TYPE_MAP['Pathfinder'] = '探路者'
+    SHIP_TYPE_MAP['Corvette'] = '巡洋舰'
+    SHIP_TYPE_MAP['Refuel'] = '加油机'
+    SHIP_TYPE_MAP['Interdiction'] = '封锁'
+    SHIP_TYPE_MAP['Gunship'] = '炮艇'
+    SHIP_TYPE_MAP['Data'] = '数据'
+    SHIP_TYPE_MAP['Destroyer'] = '驱逐舰'
+    SHIP_TYPE_MAP['Racing'] = '竞速'
+    SHIP_TYPE_MAP['Touring'] = '旅行'
+    SHIP_TYPE_MAP['Repair'] = '维修'
+    SHIP_TYPE_MAP['Combat'] = 'Combat'
+    SHIP_TYPE_MAP['Construction'] = '建造'
+    SHIP_TYPE_MAP['Exploration'] = '探索'
+    SHIP_TYPE_MAP['Bomber'] = '轰炸'
+    SHIP_TYPE_MAP['Dropship'] = '运输船'
+    SHIP_TYPE_MAP['Transport'] = '运输机'
+    SHIP_TYPE_MAP['Frigate'] = '护卫舰'
+    SHIP_TYPE_MAP['Salvage'] = '打捞'
+    SHIP_TYPE_MAP['Medical'] = '医疗'
+    SHIP_TYPE_MAP['Mining'] = '采矿'
+    SHIP_TYPE_MAP['Passenger'] = '客运'
+    SHIP_TYPE_MAP['Science'] = '科研'
+    SHIP_TYPE_MAP['Reporting'] = '新闻'
+    SHIP_TYPE_MAP['Prospecting'] = '探矿'
+    SHIP_TYPE_MAP['Recon'] = '侦查'
+    SHIP_TYPE_MAP['Stealth'] = '隐形'
+    SHIP_TYPE_MAP['Luxury'] = '豪华'
+
+
+
+    # SHIP_TYPE_MAP['Medium Fighter'] = '中型战斗机'
+    # SHIP_TYPE_MAP['Expedition'] = '探险'
+    # SHIP_TYPE_MAP['Starter / Light Freight'] = '初始/轻型货运'
+    # SHIP_TYPE_MAP['Pathfinder'] = '探路者'
+    # SHIP_TYPE_MAP['Corvette'] = '巡洋舰'
+    # SHIP_TYPE_MAP['Heavy Fighter'] = '重型战斗机'
+    # SHIP_TYPE_MAP['Light Fighter'] = '轻型战斗机'
+    # SHIP_TYPE_MAP['Heavy Refuelling'] = '重型加油机'
+    # SHIP_TYPE_MAP['Interdiction'] = '封锁'
+    # SHIP_TYPE_MAP['Light Freight'] = '轻型货运'
+    # SHIP_TYPE_MAP['Starter / Pathfinder'] = '初始/探路者'
+    # SHIP_TYPE_MAP['Snub Fighter'] = 'Snub Fighter'
+    # SHIP_TYPE_MAP['Gunship'] = '炮艇'
+    # SHIP_TYPE_MAP['Medium Data'] = '中型数据'
+    # SHIP_TYPE_MAP['Destroyer'] = '驱逐舰'
+    # SHIP_TYPE_MAP['Racing'] = '竞速'
+    # SHIP_TYPE_MAP['Touring'] = '旅行'
+    # SHIP_TYPE_MAP['Medium Repair / Medium Refuel'] = '中型修理/中型加油'
+    # SHIP_TYPE_MAP['Combat'] = 'Combat'
+    # SHIP_TYPE_MAP['Heavy Gun Ship'] = '重型炮船'
+    # SHIP_TYPE_MAP['Heavy Construction'] = '重型建造'
+    # SHIP_TYPE_MAP['Exploration'] = '探索'
+    # SHIP_TYPE_MAP['Medium Freight / Gun Ship'] = '中型战斗/炮艇'
+    # SHIP_TYPE_MAP['Stealth Bomber'] = '隐形轰炸'
+    # SHIP_TYPE_MAP['Dropship'] = '运输船'
+    # SHIP_TYPE_MAP['Heavy Freight'] = '重型货运'
+    # SHIP_TYPE_MAP['Medium Freight'] = '中型货运'
+    # SHIP_TYPE_MAP['Stealth Fighter'] = '隐形战斗机'
+    # SHIP_TYPE_MAP['Transport'] = '运输机'
+    # SHIP_TYPE_MAP['Frigate'] = '护卫舰'
+    # SHIP_TYPE_MAP['Gun Ship'] = '炮艇'
+    # SHIP_TYPE_MAP['Heavy Salvage'] = '重型打捞'
+    # SHIP_TYPE_MAP['Medium Fighter / Medium Freight'] = '中型战斗/中型货运'
+    # SHIP_TYPE_MAP['Medical'] = '医疗'
+    # SHIP_TYPE_MAP['Bomber'] = '轰炸'
+    # SHIP_TYPE_MAP['Heavy Mining'] = '重型采矿'
+    # SHIP_TYPE_MAP['Heavy Bomber'] = '重型轰炸'
+    # SHIP_TYPE_MAP['Passenger'] = '客运'
+    # SHIP_TYPE_MAP['Heavy Science'] = '重型科研'
+    # SHIP_TYPE_MAP['Heavy Repair'] = '重型修理'
+    # SHIP_TYPE_MAP['Reporting'] = '新闻船'
+    # SHIP_TYPE_MAP['Light Science'] = '轻型科研'
+    # SHIP_TYPE_MAP['Prospecting and Mining'] = '探矿&采矿'
+    # SHIP_TYPE_MAP['Exploration / Recon'] = '探索/侦查'
+    # SHIP_TYPE_MAP['Stealth'] = '隐形'
+    # SHIP_TYPE_MAP['Luxury'] = '奢华'
+    # SHIP_TYPE_MAP['Starter/Touring'] = '初始/旅行'
+    # SHIP_TYPE_MAP['Starter/Light Fighter'] = '初始/轻型战斗'
+    # SHIP_TYPE_MAP['Starter/Light Freight'] = '初始/轻型货运'
+    # SHIP_TYPE_MAP['Transport Military'] = '军用运输'
+    # SHIP_TYPE_MAP['Transport Gunship'] = '武装运输'
 
     Description = "Description"
     Size = "Size"
@@ -213,7 +321,6 @@ class StaticField:
     Y_Axis_Acceleration = "Y-Axis Acceleration"
     Z_Axis_Acceleration = "Z-Axis Acceleration"
 
-
     Avionics = "avionics"
     Modular = "modular"
     Propulsion = "propulsion"
@@ -226,8 +333,6 @@ class StaticField:
     Details = "details"
     Size = "size"
     Quantity = "quantity"
-
-
 
     @staticmethod
     def get_system_file_connector():

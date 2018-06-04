@@ -18,7 +18,6 @@ class MysqlHelper:
     def __init__(self):
         self.database = pymysql.connect(host='localhost', user=ProjectConfig.user, passwd=ProjectConfig.passwd,
                                         db=ProjectConfig.db, charset=ProjectConfig.charset)
-        # 清除挂点数据与图片数据
 
     @staticmethod
     def handle_opt_data(data):
@@ -27,7 +26,7 @@ class MysqlHelper:
         else:
             return str(data)
 
-    def select_manufacture(self, manufacturer):
+    def __select_manufacture(self, manufacturer):
         cursor = self.database.cursor()
         select_sql = "SELECT id FROM manufacturer_en WHERE name = %s"
         cursor.execute(select_sql, (self.handle_opt_data(manufacturer.name)))
@@ -40,7 +39,7 @@ class MysqlHelper:
         cursor.close()
         return False
 
-    def select_vehicle(self, vehicle):
+    def __select_vehicle(self, vehicle):
         cursor = self.database.cursor()
         select_sql = "SELECT id FROM ship_en WHERE name = %s"
         cursor.execute(select_sql, vehicle.name)
@@ -53,9 +52,9 @@ class MysqlHelper:
         cursor.close()
         return False
 
-    def insert_manufacture2mysql(self, manufacturer):
+    def __insert_manufacture2mysql(self, manufacturer):
         cursor = self.database.cursor()
-        have_data = self.select_manufacture(manufacturer)
+        have_data = self.__select_manufacture(manufacturer)
         if have_data:
             Log.d('UPDATE公司 ' + manufacturer.name)
             update_sql = 'UPDATE manufacturer_en SET code = %s , name = %s ,known_for = %s , description = %s , source_url = %s   WHERE id = %s'
@@ -83,9 +82,9 @@ class MysqlHelper:
             self.database.commit()
         cursor.close()
 
-    def insert_vehicle2mysql(self, vehicle):
+    def __insert_vehicle2mysql(self, vehicle):
         cursor = self.database.cursor()
-        have_data = self.select_vehicle(vehicle)
+        have_data = self.__select_vehicle(vehicle)
         if have_data:
             Log.d('Update Ship' + vehicle.name)
             sql = Vehicle.get_update_sql()
@@ -120,6 +119,7 @@ class MysqlHelper:
                 int(self.handle_opt_data(vehicle.id))
 
             ))
+            vehicle.id = cursor.lastrowid
             self.database.commit()
 
         else:
@@ -159,7 +159,7 @@ class MysqlHelper:
         cursor.close()
         # 给所有的设备赋值飞船id
 
-    def insert_ship_equipment(self, ship_equipment):
+    def __insert_ship_equipment(self, ship_equipment):
         # 还是先查询 更新 插入
         cursor = self.database.cursor()
         Log.d("插入装备 " + ship_equipment.type)
@@ -178,32 +178,67 @@ class MysqlHelper:
         self.database.commit()
         cursor.close()
 
-    def clear_img_ship_equipment(self):
-        cursor = self.database.cursor()
-        clear_img = ' TRUNCATE  TABLE  ship_url '
-        cursor.execute(clear_img)
-        clear_ship_equipment = 'TRUNCATE  TABLE ship_equipment_en'
-        cursor.execute(clear_ship_equipment)
-        cursor.close()
-
-    def insert_img(self, vehicle):
+    def __insert_img(self, vehicle):
         # 直接插入新的
         cursor = self.database.cursor()
+        # 先删除旧的
+        delete_sql = "DELETE FROM ship_url WHERE ship_id = %s"
+        cursor.execute(delete_sql, vehicle.id)
+        self.database.commit()
+
         for img_url in vehicle.img_urls:
             sql = "INSERT INTO ship_url (url , type ,ship_id ) VALUE (%s , %s ,%s)"
             cursor.execute(sql, (img_url, 'image', vehicle.id))
             self.database.commit()
         cursor.close()
 
-    def insert2mysql(self, vehicle):
-        self.insert_vehicle2mysql(vehicle)
-        self.insert_img(vehicle)
+    def insert_vehicle(self, vehicle):
+        # 更新载具
+        self.__insert_vehicle2mysql(vehicle)
+        # 更新载具url
+        self.__insert_img(vehicle)
+        # 更新载具类型
+        self.__insert_ship_type(vehicle)
+        # 更新载具装备
+        # 先删除旧的装备
+        cursor = self.database.cursor()
+        delete_sql = "DELETE FROM ship_equipment_en WHERE ship_id = %s"
+        cursor.execute(delete_sql, vehicle.id)
+        self.database.commit()
+        cursor.close()
+
         for equip in vehicle.ship_equipment_list:
-            self.insert_ship_equipment(equip)
+            self.__insert_ship_equipment(equip)
 
     def insert_manufacturer(self, manufacturer_list):
         for manufacturer in manufacturer_list:
-            self.insert_manufacture2mysql(manufacturer)
+            self.__insert_manufacture2mysql(manufacturer)
+
+    def __insert_ship_type(self, vehicle):
+        cursor = self.database.cursor()
+        # 先删除旧的
+        delete_sql = "DELETE FROM ship_type WHERE ship_id = %s"
+        cursor.execute(delete_sql, vehicle.id)
+        self.database.commit()
+
+        ship_types = []
+        focus = vehicle.focus
+        keys_data = StaticField.SHIP_TYPE_MAP.keys()
+        if focus is None:
+            return
+        data = focus.split("/")
+        for ship_type in data:
+            ship_type = ship_type.strip()
+            if 'Gun Ship' in ship_type:
+                ship_types.append('Gunship')
+            for key_type in keys_data:
+                if key_type in ship_type:
+                    ship_types.append(key_type)
+        for type_content in ship_types:
+            insert_sql = "INSERT INTO ship_type (ship_id , type_content ) VALUE (%s , %s )"
+            cursor.execute(insert_sql, (vehicle.id, type_content))
+        cursor.close()
+        self.database.commit()
 
     def insert_comm_link(self, comm_link):
         cursor = self.database.cursor()
@@ -231,9 +266,9 @@ class MysqlHelper:
 
         self.database.commit()
         cursor.close()
-        self.insert_comm_link_content(comm_link)
+        self.__insert_comm_link_content(comm_link)
 
-    def insert_comm_link_content(self, comm_link):
+    def __insert_comm_link_content(self, comm_link):
         cursor = self.database.cursor()
         select_sql = "SELECT id FROM comm_link_content WHERE comm_link_id = %s "
         cursor.execute(select_sql, comm_link.id)
@@ -261,23 +296,25 @@ class MysqlHelper:
                                                  comm_link.id, content.data_index))
             self.database.commit()
         cursor.close()
-# def insert_constant_translate(self):
-#     for key in StaticField.SHIP_NAME_MAP.keys():
-#         sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
-#         cursor = self.database.cursor()
-#         cursor.execute(sql, (key, StaticField.SHIP_NAME_MAP[key]))
-#         self.database.commit()
-#
-#     for key in StaticField.COMPANY_MAP.keys():
-#         sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
-#         cursor = self.database.cursor()
-#         cursor.execute(sql, (key, StaticField.COMPANY_MAP[key]))
-#         self.database.commit()
-#
-#     for key in StaticField.CONSTANT_GROUP.keys():
-#         sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
-#         cursor = self.database.cursor()
-#         cursor.execute(sql, (key, StaticField.CONSTANT_GROUP[key]))
-#         self.database.commit()
-#
-#     self.database.close()
+
+    def insert_constant_translate(self):
+        cursor = self.database.cursor()
+        clear_constant_translate = ' TRUNCATE  TABLE  constant_translate '
+        cursor.execute(clear_constant_translate)
+        self.database.commit()
+
+        for key in StaticField.SHIP_NAME_MAP.keys():
+            sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
+            cursor.execute(sql, (key, StaticField.SHIP_NAME_MAP[key]))
+            self.database.commit()
+
+        for key in StaticField.COMPANY_MAP.keys():
+            sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
+            cursor.execute(sql, (key, StaticField.COMPANY_MAP[key]))
+            self.database.commit()
+
+        for key in StaticField.CONSTANT_GROUP.keys():
+            sql = "INSERT INTO constant_translate (original_text , translate_value) VALUE (%s , %s)"
+            cursor.execute(sql, (key, StaticField.CONSTANT_GROUP[key]))
+            self.database.commit()
+

@@ -14,12 +14,12 @@ import time
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
-ship_list = []
 manufacturer_list = []
 chassis_id_list = []
 
 
 def init_vehicle(url):
+    mysql_helper = MysqlHelper()
     vehicle = Vehicle(url)
     page = ''
     while page == '':
@@ -77,11 +77,10 @@ def init_vehicle(url):
 
         vehicle.img_urls = img_urls
 
-    ship_list.append(vehicle)
+    mysql_helper.insert_vehicle(vehicle)
 
 
 def get_ships():
-    mysql_helper = MysqlHelper()
     page = 1
     ship_json = get_ship_json(page)
     html = ship_json.get('data').get('html')
@@ -97,10 +96,8 @@ def get_ships():
         html = ship_json.get('data').get('html')
         init_ship(html)
 
-    mysql_helper.clear_img_ship_equipment()
-    for ship in ship_list:
-        mysql_helper.insert2mysql(ship)
-        #     插入公司
+    mysql_helper = MysqlHelper()
+    #     插入公司
     Log.d('开始将公司插入数据库')
     mysql_helper.insert_manufacturer(manufacturer_list)
 
