@@ -328,6 +328,6 @@ class MysqlHelper:
         self.database.commit()
 
         for key in StaticField.SHIP_TYPE_MAP.keys():
-            sql = "INSERT INTO ship_type_constant (name_ch , name_en) VALUE (%s , %s)"
-            cursor.execute(sql, (StaticField.SHIP_TYPE_MAP[key], key))
+            sql = "INSERT INTO ship_type_constant (type_en , type_ch) VALUE (%s , %s)"
+            cursor.execute(sql, (key, StaticField.SHIP_TYPE_MAP[key]))
             self.database.commit()
