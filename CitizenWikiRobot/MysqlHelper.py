@@ -205,8 +205,8 @@ class MysqlHelper:
         cursor = self.database.cursor()
         delete_sql = "DELETE FROM ship_equipment_en WHERE ship_id = %s "
         cursor.execute(delete_sql, vehicle.id)
-        Log.d("id : "+str(vehicle.id))
-        Log.d("删除了 : "+str(cursor.rowcount))
+        Log.d("id : " + str(vehicle.id))
+        Log.d("删除了 : " + str(cursor.rowcount))
         self.database.commit()
         cursor.close()
 
@@ -321,3 +321,13 @@ class MysqlHelper:
             cursor.execute(sql, (key, StaticField.CONSTANT_GROUP[key]))
             self.database.commit()
 
+    def insert_all_ship_type(self):
+        cursor = self.database.cursor()
+        clear_constant_translate = ' TRUNCATE  TABLE  ship_type_constant '
+        cursor.execute(clear_constant_translate)
+        self.database.commit()
+
+        for key in StaticField.SHIP_TYPE_MAP.keys():
+            sql = "INSERT INTO ship_type_constant (name_ch , name_en) VALUE (%s , %s)"
+            cursor.execute(sql, (StaticField.SHIP_TYPE_MAP[key], key))
+            self.database.commit()

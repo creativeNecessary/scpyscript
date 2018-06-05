@@ -212,4 +212,10 @@
 # DELETE FROM ship_en  WHERE name = 'AEGIS Vulcan';
 # DELETE FROM ship_en  WHERE name = 'Tumbril - Nova Tank';
 
-
+# type 常量库
+# CREATE TABLE ship_type_constant (
+# id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+# name_ch VARCHAR(500) CHARACTER SET utf8 NOT NULL DEFAULT '' ,
+# name_en VARCHAR(500) CHARACTER SET utf8 NOT NULL DEFAULT '' ,
+# update_time timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+# PRIMARY KEY ( id ));
