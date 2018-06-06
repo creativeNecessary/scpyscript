@@ -1,9 +1,11 @@
+# -*-coding:utf-8 -*-
 from CitizenWikiRobot.ship_robot import get_ships
 from CitizenWikiRobot.roadmap import init_road_map
 from CitizenWikiRobot.MysqlHelper import MysqlHelper
 from CitizenWikiRobot.comm_link_spectrum_dispatch import get_galactic_guide
 
 import sys
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
