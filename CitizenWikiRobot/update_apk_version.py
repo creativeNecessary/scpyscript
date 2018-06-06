@@ -1,4 +1,4 @@
-# -*-coding:utf-8 -*-
+# -*- coding: UTF-8 -*-
 from CitizenWikiRobot.ship_robot import get_ships
 from CitizenWikiRobot.roadmap import init_road_map
 from CitizenWikiRobot.MysqlHelper import MysqlHelper
