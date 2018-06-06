@@ -211,6 +211,7 @@
 # DELETE FROM ship_en  WHERE name = 'ANVIL Hawk';
 # DELETE FROM ship_en  WHERE name = 'AEGIS Vulcan';
 # DELETE FROM ship_en  WHERE name = 'Tumbril - Nova Tank';
+# DELETE FROM ship_equipment_en  WHERE ship_id = '150';
 
 # type 常量库
 # CREATE TABLE ship_type_constant (
@@ -219,3 +220,5 @@
 # type_ch VARCHAR(500) CHARACTER SET utf8 NOT NULL DEFAULT '' ,
 # update_time timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 # PRIMARY KEY ( id ));
+
+# alter table app_version add column state  VARCHAR(100) NOT NULL DEFAULT '';

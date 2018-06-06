@@ -331,3 +331,9 @@ class MysqlHelper:
             sql = "INSERT INTO ship_type_constant (type_en , type_ch) VALUE (%s , %s)"
             cursor.execute(sql, (key, StaticField.SHIP_TYPE_MAP[key]))
             self.database.commit()
+
+    def update_apk(self, version_code, version_name, update_message, apk_file_name):
+        cursor = self.database.cursor()
+        sql = "INSERT INTO app_version(version_code,version_name,version_focus,apk_file_name) VALUES (%s , %s , %s ,%s);"
+        cursor.execute(sql, (version_code, version_name, update_message, apk_file_name))
+        self.database.commit()
