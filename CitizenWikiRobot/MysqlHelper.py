@@ -206,6 +206,7 @@ class MysqlHelper:
         delete_sql = "DELETE FROM ship_equipment_en WHERE ship_id = %s "
         cursor.execute(delete_sql, vehicle.id)
         Log.d("id : " + str(vehicle.id))
+        Log.d("name : " + str(vehicle.name))
         Log.d("删除了 : " + str(cursor.rowcount))
         self.database.commit()
         cursor.close()

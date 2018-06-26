@@ -222,3 +222,4 @@
 # PRIMARY KEY ( id ));
 
 # alter table app_version add column state  VARCHAR(100) NOT NULL DEFAULT '';
+# ALTER TABLE app_version CHANGE version_focus version_focus VARCHAR(500) CHARACTER SET utf8 NOT NULL DEFAULT '';
