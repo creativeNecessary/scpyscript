@@ -19,7 +19,7 @@ chassis_id_list = []
 
 
 def init_vehicle(url):
-    mysql_helper = MysqlHelper()
+    # mysql_helper = MysqlHelper()
     vehicle = Vehicle(url)
     page = ''
     while page == '':
@@ -36,7 +36,7 @@ def init_vehicle(url):
     ship_soup = bs4.BeautifulSoup(page.content, "lxml")
 
     all_script_tag = ship_soup.find_all('script')
-    chassis_id_tag = all_script_tag[2].text
+    chassis_id_tag = all_script_tag[1].text
 
     start_index = chassis_id_tag.find('chassis_id:')
     chassis_id_content = chassis_id_tag[start_index:start_index + 30]
@@ -76,8 +76,8 @@ def init_vehicle(url):
                     img_urls.append(img_url)
 
         vehicle.img_urls = img_urls
-
-    mysql_helper.insert_vehicle(vehicle)
+    Log.d("test")
+    # mysql_helper.insert_vehicle(vehicle)
 
 
 def get_ships():
@@ -96,10 +96,10 @@ def get_ships():
         html = ship_json.get('data').get('html')
         init_ship(html)
 
-    mysql_helper = MysqlHelper()
-    #     插入公司
-    Log.d('开始将公司插入数据库')
-    mysql_helper.insert_manufacturer(manufacturer_list)
+    # mysql_helper = MysqlHelper()
+    # #     插入公司
+    # Log.d('开始将公司插入数据库')
+    # mysql_helper.insert_manufacturer(manufacturer_list)
 
 
 def init_ship(html):
