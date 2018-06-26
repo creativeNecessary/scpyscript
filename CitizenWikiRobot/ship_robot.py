@@ -19,7 +19,7 @@ chassis_id_list = []
 
 
 def init_vehicle(url):
-    # mysql_helper = MysqlHelper()
+    mysql_helper = MysqlHelper()
     vehicle = Vehicle(url)
     page = ''
     while page == '':
@@ -76,8 +76,7 @@ def init_vehicle(url):
                     img_urls.append(img_url)
 
         vehicle.img_urls = img_urls
-    Log.d("test")
-    # mysql_helper.insert_vehicle(vehicle)
+    mysql_helper.insert_vehicle(vehicle)
 
 
 def get_ships():
@@ -96,10 +95,10 @@ def get_ships():
         html = ship_json.get('data').get('html')
         init_ship(html)
 
-    # mysql_helper = MysqlHelper()
-    # #     插入公司
-    # Log.d('开始将公司插入数据库')
-    # mysql_helper.insert_manufacturer(manufacturer_list)
+    mysql_helper = MysqlHelper()
+    #     插入公司
+    Log.d('开始将公司插入数据库')
+    mysql_helper.insert_manufacturer(manufacturer_list)
 
 
 def init_ship(html):
