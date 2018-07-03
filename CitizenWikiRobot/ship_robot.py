@@ -18,6 +18,21 @@ manufacturer_list = []
 chassis_id_list = []
 
 
+def __get_chassis_id(ship_soup):
+    all_script_tag = ship_soup.find_all('script')
+    chassis_id = ''
+    for script_tag in all_script_tag:
+        chassis_id_tag = script_tag.text
+        start_index = chassis_id_tag.find('chassis_id:')
+        chassis_id_content = chassis_id_tag[start_index:start_index + 30]
+        start_index = chassis_id_content.find(':')
+        end_index = chassis_id_content.find('}')
+        chassis_id = chassis_id_content[start_index + 1: end_index]
+        if chassis_id != '':
+            return chassis_id
+    return chassis_id
+
+
 def init_vehicle(url):
     mysql_helper = MysqlHelper()
     vehicle = Vehicle(url)
@@ -35,14 +50,17 @@ def init_vehicle(url):
 
     ship_soup = bs4.BeautifulSoup(page.content, "lxml")
 
-    all_script_tag = ship_soup.find_all('script')
-    chassis_id_tag = all_script_tag[1].text
-
-    start_index = chassis_id_tag.find('chassis_id:')
-    chassis_id_content = chassis_id_tag[start_index:start_index + 30]
-    start_index = chassis_id_content.find(':')
-    end_index = chassis_id_content.find('}')
-    chassis_id = chassis_id_content[start_index + 1: end_index]
+    # all_script_tag = ship_soup.find_all('script')
+    # chassis_id_tag = all_script_tag[1].text
+    #
+    # start_index = chassis_id_tag.find('chassis_id:')
+    # chassis_id_content = chassis_id_tag[start_index:start_index + 30]
+    # start_index = chassis_id_content.find(':')
+    # end_index = chassis_id_content.find('}')
+    # chassis_id = chassis_id_content[start_index + 1: end_index]
+    chassis_id = __get_chassis_id(ship_soup)
+    if chassis_id == '':
+        return
     id_url = 'https://robertsspaceindustries.com/ship-matrix/index?chassis_id=' + chassis_id
     ships_req = ''
     while ships_req == '':
