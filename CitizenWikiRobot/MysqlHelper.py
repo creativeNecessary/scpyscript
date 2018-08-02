@@ -230,8 +230,8 @@ class MysqlHelper:
         keys_data = StaticField.SHIP_TYPE_MAP.keys()
         if focus is None:
             return
-        data1 = focus.split("/")
-        data = data1.split("-")
+        focus1 = focus.strip('-')
+        data = focus1.split("/")
         for ship_type in data:
             ship_type = ship_type.strip()
             if 'Gun Ship' in ship_type:
