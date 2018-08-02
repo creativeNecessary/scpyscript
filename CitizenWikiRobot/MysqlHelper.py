@@ -231,6 +231,7 @@ class MysqlHelper:
         if focus is None:
             return
         data = focus.split("/")
+        data = focus.split("-")
         for ship_type in data:
             ship_type = ship_type.strip()
             if 'Gun Ship' in ship_type:
