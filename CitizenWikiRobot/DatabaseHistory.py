@@ -222,4 +222,6 @@
 # PRIMARY KEY ( id ));
 
 # alter table app_version add column state  VARCHAR(100) NOT NULL DEFAULT '';
+# alter table app_version add column apk_download_path  VARCHAR(2000) NOT NULL DEFAULT '';
 # ALTER TABLE app_version CHANGE version_focus version_focus VARCHAR(500) CHARACTER SET utf8 NOT NULL DEFAULT '';
+# ALTER TABLE app_version CHANGE apk_down_path apk_download_path VARCHAR(2000) CHARACTER SET utf8 NOT NULL DEFAULT '';
