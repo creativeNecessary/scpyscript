@@ -214,6 +214,7 @@ class StaticField:
     SHIP_NAME_MAP['Anvil Valkyrie Liberator Edition'] = '瓦尔基里解放版'
     SHIP_NAME_MAP['Mustang Alpha Vindicator'] = '野马维护者'
     SHIP_NAME_MAP['Mercury Star Runner'] = '墨丘利'
+    SHIP_NAME_MAP['Drake Kraken'] = '海妖'
 
     # Fighter
     # SHIP_TYPE_MAP['Refuelling'] = '加油机'
