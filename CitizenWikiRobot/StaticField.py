@@ -210,6 +210,10 @@ class StaticField:
     SHIP_NAME_MAP['Vulture'] = '秃鹰'
     SHIP_NAME_MAP['Apollo Triage'] = '阿波罗Triage'
     SHIP_NAME_MAP['Apollo Medivac'] = '阿波罗Medivac'
+    SHIP_NAME_MAP['Anvil Valkyrie'] = '瓦尔基里'
+    SHIP_NAME_MAP['Anvil Valkyrie Liberator Edition'] = '瓦尔基里解放版'
+    SHIP_NAME_MAP['Mustang Alpha Vindicator'] = '野马维护者'
+    SHIP_NAME_MAP['Mercury Star Runner'] = '墨丘利'
 
     # Fighter
     # SHIP_TYPE_MAP['Refuelling'] = '加油机'
