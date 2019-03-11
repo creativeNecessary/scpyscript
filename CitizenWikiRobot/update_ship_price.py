@@ -10,4 +10,6 @@ if __name__ == '__main__':
     for ship_price in jsonStr:
         name = ship_price.get('name')
         price = ship_price.get('msrp')
-        my.update_ship_price(name, price)
+        price_final = price[1:]
+        Log.d(price_final)
+        my.update_ship_price(name, price_final)
