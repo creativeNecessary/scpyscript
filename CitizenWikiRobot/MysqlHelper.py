@@ -344,6 +344,5 @@ class MysqlHelper:
         cursor = self.database.cursor()
         update_sql = 'UPDATE ship_en SET ship_price = %s  WHERE name = %s'
         cursor.execute(update_sql,
-                       price,
-                       name)
+                       (price, name))
         self.database.commit()
