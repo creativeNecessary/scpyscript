@@ -339,3 +339,11 @@ class MysqlHelper:
         sql = "INSERT INTO app_version(version_code,version_name,version_focus,apk_file_name,state,apk_download_path) VALUES (%s , %s , %s ,%s, %s, %s);"
         cursor.execute(sql, (version_code, version_name, update_message, apk_file_name, state, apk_download_path))
         self.database.commit()
+
+    def update_ship_price(self, name, price):
+        cursor = self.database.cursor()
+        update_sql = 'UPDATE ship_en SET ship_price = %s  WHERE name = %s'
+        cursor.execute(update_sql,
+                       price,
+                       name)
+        self.database.commit()

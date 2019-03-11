@@ -225,3 +225,6 @@
 # alter table app_version add column apk_download_path  VARCHAR(2000) NOT NULL DEFAULT '';
 # ALTER TABLE app_version CHANGE version_focus version_focus VARCHAR(500) CHARACTER SET utf8 NOT NULL DEFAULT '';
 # ALTER TABLE app_version CHANGE apk_down_path apk_download_path VARCHAR(2000) CHARACTER SET utf8 NOT NULL DEFAULT '';
+# alter table `constant_translate` convert to character set utf8;
+# alter table ship_en add column ship_price  VARCHAR(3000) NOT NULL DEFAULT '';
+
